@@ -1,0 +1,2 @@
+add_executable(testVecteur TestVecteur.cxx)
+target_link_libraries(testVecteur vecteur)

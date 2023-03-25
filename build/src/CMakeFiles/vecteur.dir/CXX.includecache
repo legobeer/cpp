@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Vecteur.hxx
+
+/home/antonin/cpp/src/Vecteur.cxx
+Vecteur.hxx
+/home/antonin/cpp/src/Vecteur.hxx
+iostream
+-
+
