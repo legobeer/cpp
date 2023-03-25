@@ -8,6 +8,8 @@ private:
 
 public:
     Vecteur();
+    Vecteur(double);
+    Vecteur(double, double);
     Vecteur(double, double, double);
 
     double getX();
@@ -15,6 +17,8 @@ public:
     double getY();
 
     double getZ();
+
+    void setVecteur(Vecteur);
 
     void multiplyScalar(double);
 
