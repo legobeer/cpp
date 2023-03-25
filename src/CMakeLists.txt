@@ -1,1 +1,1 @@
-add_library(vecteur Vecteur.cxx Particule.cxx)
+add_library(particules Particule.cxx Vecteur.cxx Univers.cxx)

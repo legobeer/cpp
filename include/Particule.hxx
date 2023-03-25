@@ -16,7 +16,7 @@ private:
     int id;
 
 public:
-    Particule(Vecteur, Vecteur, double, int, int);
+    Particule(Vecteur, double, int, int);
 
     Vecteur getVitesse();
     Vecteur getPosition();
@@ -30,7 +30,3 @@ public:
 
     void updateVitesse(double, Vecteur);
 };
-
-void stromerVerlet(list<Particule> &, vector<Vecteur> &, double, double);
-
-void initialisationForces(list<Particule> &);

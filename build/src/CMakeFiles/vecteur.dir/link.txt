@@ -1,2 +1,0 @@
-/usr/bin/ar qc libvecteur.a  CMakeFiles/vecteur.dir/Vecteur.cxx.o
-/usr/bin/ranlib libvecteur.a
