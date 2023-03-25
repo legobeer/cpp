@@ -103,6 +103,13 @@ build src/CMakeFiles/vecteur.dir/Particule.cxx.o: CXX_COMPILER__vecteur ../src/P
   OBJECT_DIR = src/CMakeFiles/vecteur.dir
   OBJECT_FILE_DIR = src/CMakeFiles/vecteur.dir
 
+build src/CMakeFiles/vecteur.dir/Univers.cxx.o: CXX_COMPILER__vecteur ../src/Univers.cxx || cmake_object_order_depends_target_vecteur
+  DEP_FILE = src/CMakeFiles/vecteur.dir/Univers.cxx.o.d
+  FLAGS = -Wall -g   -std=gnu++17
+  INCLUDES = -I../include
+  OBJECT_DIR = src/CMakeFiles/vecteur.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/vecteur.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target vecteur
@@ -111,7 +118,7 @@ build src/CMakeFiles/vecteur.dir/Particule.cxx.o: CXX_COMPILER__vecteur ../src/P
 #############################################
 # Link the static library src/libvecteur.a
 
-build src/libvecteur.a: CXX_STATIC_LIBRARY_LINKER__vecteur src/CMakeFiles/vecteur.dir/Vecteur.cxx.o src/CMakeFiles/vecteur.dir/Particule.cxx.o
+build src/libvecteur.a: CXX_STATIC_LIBRARY_LINKER__vecteur src/CMakeFiles/vecteur.dir/Vecteur.cxx.o src/CMakeFiles/vecteur.dir/Particule.cxx.o src/CMakeFiles/vecteur.dir/Univers.cxx.o
   LANGUAGE_COMPILE_FLAGS = -Wall -g
   OBJECT_DIR = src/CMakeFiles/vecteur.dir
   POST_BUILD = :

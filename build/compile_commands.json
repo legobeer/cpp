@@ -13,6 +13,12 @@
 
 {
   "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/vecteur.dir/Univers.cxx.o -c /home/antonin/cpp/src/Univers.cxx",
+  "file": "/home/antonin/cpp/src/Univers.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
   "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testVecteur.dir/TestVecteur.cxx.o -c /home/antonin/cpp/test/TestVecteur.cxx",
   "file": "/home/antonin/cpp/test/TestVecteur.cxx"
 }
