@@ -10,5 +10,9 @@ int main()
     vecteur1.displayVector();
     vecteur1.addVectors(vecteur2);
     vecteur1.displayVector();
+    Vecteur direction = vecteur1.getDirection(vecteur2);
+    direction.displayVector();
+    vecteur1.setVecteur(direction);
+    vecteur1.displayVector();
     return 0;
 }
