@@ -18,22 +18,17 @@ Particule::Particule(Vecteur position, Vecteur vitesse, double masse, int type, 
 
 Vecteur Particule::getVitesse() { return vitesse; }
 Vecteur Particule::getPosition() { return position; }
-Vecteur Particule::getForce() { return force; }
+Vecteur *Particule::getForce() { return &force; }
 int Particule::getId() { return id; }
 double Particule::getMasse() { return masse; }
 
-void Particule::computeForce(list<Particule> &particules)
+Vecteur Particule::forceParticule(Particule particule)
 {
-    Vecteur direction;
-    for (Particule &particule : particules)
-    {
-        if (particule.getId() == this->id)
-            continue;
-        direction = position.getDirection(particule.getPosition());
-        direction.multiplyScalar(masse * particule.getMasse());
-        direction.multiplyScalar(pow(position.computeDistance(particule.getPosition()), -3));
-        this->force.addVectors(direction);
-    }
+    Vecteur direction = position.getDirection(particule.getPosition());
+    direction.multiplyScalar(masse * particule.getMasse());
+    direction.multiplyScalar(pow(position.computeDistance(particule.getPosition()), -3));
+    direction.addVectors(force);
+    return direction;
 }
 
 void Particule::updatePosition(double gammaT)
@@ -65,7 +60,7 @@ void stromerVerlet(list<Particule> &particules, vector<Vecteur> &fOld, double tE
         for (Particule &particule : particules)
         {
             particule.updatePosition(gammaT);
-            fOld[i] = particule.getForce();
+            fOld[i] = *particule.getForce();
             i++;
         }
         /* Calcul des forces */
@@ -81,6 +76,21 @@ void stromerVerlet(list<Particule> &particules, vector<Vecteur> &fOld, double tE
 
 void initialisationForces(list<Particule> &particules)
 {
-    for (Particule &particule : particules)
-        particule.computeForce(particules);
+    int iemeParticule = 0, jiemeParticule;
+    Vecteur Fij;
+    for (Particule &particuleI : particules)
+    {
+        jiemeParticule = 0;
+        for (Particule &particuleJ : particules)
+        {
+            if (iemeParticule >= jiemeParticule)
+                continue;
+            Fij = particuleI.forceParticule(particuleJ);
+            particuleI.getForce()->addVectors(Fij);
+            Fij.multiplyScalar(-1);
+            particuleJ.getForce()->addVectors(Fij);
+            jiemeParticule++;
+        }
+        iemeParticule++;
+    }
 }

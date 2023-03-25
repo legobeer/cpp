@@ -20,11 +20,11 @@ public:
 
     Vecteur getVitesse();
     Vecteur getPosition();
-    Vecteur getForce();
+    Vecteur *getForce();
     int getId();
     double getMasse();
 
-    void computeForce(list<Particule> &);
+    Vecteur forceParticule(Particule);
 
     void updatePosition(double);
 
