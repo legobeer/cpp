@@ -20,7 +20,11 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     }
 }
 
+/* Constructor used for make the test of Stromer-Verlet TP2 */
+
 list<Particule> &Univers::getParticules() { return particules; }
+
+int Univers::getNombreParticules() { return nombreParticules; }
 
 void Univers::stromerVerlet(vector<Vecteur> &fOld, double tEnd, double gammaT)
 {
@@ -58,7 +62,10 @@ void Univers::initialisationForces()
         for (Particule &particuleJ : particules)
         {
             if (iemeParticule >= jiemeParticule)
+            {
+                jiemeParticule++;
                 continue;
+            }
             Fij = particuleI.forceParticule(particuleJ);
             particuleI.getForce()->addVectors(Fij);
             Fij.multiplyScalar(-1);
@@ -69,27 +76,36 @@ void Univers::initialisationForces()
     }
 }
 
+void Univers::display()
+{
+    for (Particule particule : particules)
+        particule.display();
+}
+
 Particule creerParticule(Vecteur borneInf, Vecteur borneSup, int nombreDimension, int id)
 {
     random_device rd;
     mt19937 mt(rd());
     double x = 0, y = 0, z = 0, masse;
-    if (nombreDimension < 2)
+    if (nombreDimension > 0)
     {
         uniform_real_distribution<double> dist(borneInf.getX(), borneSup.getX());
         x = dist(mt);
+        cout << x << endl;
     }
-    if (nombreDimension < 3)
+    if (nombreDimension > 1)
     {
         uniform_real_distribution<double> dist(borneInf.getY(), borneSup.getY());
         y = dist(mt);
+        cout << y << endl;
     }
-    if (nombreDimension < 4)
+    if (nombreDimension > 2)
     {
         uniform_real_distribution<double> dist(borneInf.getZ(), borneSup.getZ());
         z = dist(mt);
+        cout << z << endl;
     }
-    uniform_real_distribution<double> dist(0, 1);
+    uniform_real_distribution<double> dist(0.005, 0.01);
     masse = dist(mt);
     return Particule(Vecteur(x, y, z), masse, 0, id);
 }

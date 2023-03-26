@@ -29,7 +29,7 @@
 					"source" : "src",
 					"targetIndexes" : 
 					[
-						0
+						1
 					]
 				},
 				{
@@ -43,9 +43,10 @@
 					"source" : "test",
 					"targetIndexes" : 
 					[
-						1,
+						0,
 						2,
-						3
+						3,
+						4
 					]
 				}
 			],
@@ -65,12 +66,20 @@
 						0,
 						1,
 						2,
-						3
+						3,
+						4
 					]
 				}
 			],
 			"targets" : 
 			[
+				{
+					"directoryIndex" : 2,
+					"id" : "haley::@36f028580bb02cc8272a",
+					"jsonFile" : "target-haley-d9600241d188d0af272b.json",
+					"name" : "haley",
+					"projectIndex" : 0
+				},
 				{
 					"directoryIndex" : 1,
 					"id" : "particules::@145eef247bfb46b6828c",
@@ -81,7 +90,7 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "testParticule::@36f028580bb02cc8272a",
-					"jsonFile" : "target-testParticule-b78a6f1081096b4fcdd8.json",
+					"jsonFile" : "target-testParticule-a762f9a2510ff0ae2675.json",
 					"name" : "testParticule",
 					"projectIndex" : 0
 				},

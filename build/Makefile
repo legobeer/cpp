@@ -137,6 +137,19 @@ testParticule/fast:
 .PHONY : testParticule/fast
 
 #=============================================================================
+# Target rules for targets named haley
+
+# Build rule for target.
+haley: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 haley
+.PHONY : haley
+
+# fast build rule for target.
+haley/fast:
+	$(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
+.PHONY : haley/fast
+
+#=============================================================================
 # Target rules for targets named testUnivers
 
 # Build rule for target.
@@ -172,6 +185,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... particules"
 	@echo "... testParticule"
+	@echo "... haley"
 	@echo "... testUnivers"
 	@echo "... testVecteur"
 .PHONY : help

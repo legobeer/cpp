@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 #include "Vecteur.hxx"
 #include "Particule.hxx"
+#include <iostream>
 
 using namespace std;
 
@@ -10,6 +11,16 @@ Particule::Particule(Vecteur position, double masse, int type, int id)
 {
     this->position = position;
     this->vitesse = Vecteur(0, 0, 0);
+    this->force = Vecteur(0, 0, 0);
+    this->masse = masse;
+    this->type = type;
+    this->id = id;
+}
+
+Particule::Particule(Vecteur position, Vecteur vitesse, double masse, int type, int id)
+{
+    this->position = position;
+    this->vitesse = vitesse;
     this->force = Vecteur(0, 0, 0);
     this->masse = masse;
     this->type = type;
@@ -46,4 +57,15 @@ void Particule::updateVitesse(double gammaT, Vecteur fOld)
     fParticule.addVectors(fOld);
     fParticule.multiplyScalar(0.5 * gammaT * masse);
     vitesse.addVectors(fParticule);
+}
+
+void Particule::display()
+{
+    cout << "Particule n°" << id << "\nPosition : ";
+    position.displayVector();
+    cout << "Masse : " << masse << "\nType : " << type << "\nVitesse : ";
+    vitesse.displayVector();
+    cout << "Force : ";
+    force.displayVector();
+    cout << "------------------------------------" << endl;
 }

@@ -76,5 +76,5 @@ double Vecteur::computeDistance(Vecteur vecteur)
 
 void Vecteur::displayVector()
 {
-    cout << x << " " << y << " " << z << "\n";
+    cout << "(" << x << ", " << y << ", " << z << ")\n";
 }

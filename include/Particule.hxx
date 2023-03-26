@@ -18,6 +18,8 @@ private:
 public:
     Particule(Vecteur, double, int, int);
 
+    Particule(Vecteur, Vecteur, double, int, int);
+
     Vecteur getVitesse();
     Vecteur getPosition();
     Vecteur *getForce();
@@ -29,4 +31,6 @@ public:
     void updatePosition(double);
 
     void updateVitesse(double, Vecteur);
+
+    void display();
 };

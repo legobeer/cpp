@@ -126,6 +126,21 @@ testParticule/fast:
 .PHONY : testParticule/fast
 
 # Convenience name for target.
+test/CMakeFiles/haley.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/haley.dir/rule
+.PHONY : test/CMakeFiles/haley.dir/rule
+
+# Convenience name for target.
+haley: test/CMakeFiles/haley.dir/rule
+
+.PHONY : haley
+
+# fast build rule for target.
+haley/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
+.PHONY : haley/fast
+
+# Convenience name for target.
 test/CMakeFiles/testUnivers.dir/rule:
 	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testUnivers.dir/rule
 .PHONY : test/CMakeFiles/testUnivers.dir/rule
@@ -154,6 +169,33 @@ testVecteur: test/CMakeFiles/testVecteur.dir/rule
 testVecteur/fast:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/build
 .PHONY : testVecteur/fast
+
+Haley.o: Haley.cxx.o
+
+.PHONY : Haley.o
+
+# target to build an object file
+Haley.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.o
+.PHONY : Haley.cxx.o
+
+Haley.i: Haley.cxx.i
+
+.PHONY : Haley.i
+
+# target to preprocess a source file
+Haley.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.i
+.PHONY : Haley.cxx.i
+
+Haley.s: Haley.cxx.s
+
+.PHONY : Haley.s
+
+# target to generate assembly for a file
+Haley.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.s
+.PHONY : Haley.cxx.s
 
 TestParticule.o: TestParticule.cxx.o
 
@@ -245,8 +287,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... testParticule"
+	@echo "... haley"
 	@echo "... testUnivers"
 	@echo "... testVecteur"
+	@echo "... Haley.o"
+	@echo "... Haley.i"
+	@echo "... Haley.s"
 	@echo "... TestParticule.o"
 	@echo "... TestParticule.i"
 	@echo "... TestParticule.s"

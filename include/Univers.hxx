@@ -18,9 +18,13 @@ public:
 
     list<Particule> &getParticules();
 
+    int getNombreParticules();
+
     void stromerVerlet(vector<Vecteur> &, double, double);
 
     void initialisationForces();
+
+    void display();
 };
 
 Particule creerParticule(Vecteur, Vecteur, int, int);

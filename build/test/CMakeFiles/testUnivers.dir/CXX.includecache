@@ -6,5 +6,29 @@
 
 #IncludeRegexTransform: 
 
+../include/Particule.hxx
+Vecteur.hxx
+../include/Vecteur.hxx
+list
+-
+vector
+-
+
+../include/Univers.hxx
+Vecteur.hxx
+../include/Vecteur.hxx
+Particule.hxx
+../include/Particule.hxx
+vector
+-
+list
+-
+
+../include/Vecteur.hxx
+
 /home/antonin/cpp/test/TestUnivers.cxx
+Univers.hxx
+/home/antonin/cpp/test/Univers.hxx
+iostream
+-
 
