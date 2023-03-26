@@ -50,7 +50,7 @@
 					]
 				}
 			],
-			"name" : "",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -76,35 +76,35 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "haley::@36f028580bb02cc8272a",
-					"jsonFile" : "target-haley-d9600241d188d0af272b.json",
+					"jsonFile" : "target-haley-Debug-f582977fabaef1cb67a5.json",
 					"name" : "haley",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "particules::@145eef247bfb46b6828c",
-					"jsonFile" : "target-particules-d0d46dde10a828e2b4f9.json",
+					"jsonFile" : "target-particules-Debug-5ebc817f11cda19137cc.json",
 					"name" : "particules",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "testParticule::@36f028580bb02cc8272a",
-					"jsonFile" : "target-testParticule-a762f9a2510ff0ae2675.json",
+					"jsonFile" : "target-testParticule-Debug-74e4c4d07b95fb69aed6.json",
 					"name" : "testParticule",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "testUnivers::@36f028580bb02cc8272a",
-					"jsonFile" : "target-testUnivers-7029df6fcbb2fb79392c.json",
+					"jsonFile" : "target-testUnivers-Debug-f29ba3ddb1d2d0b45e65.json",
 					"name" : "testUnivers",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "testVecteur::@36f028580bb02cc8272a",
-					"jsonFile" : "target-testVecteur-95cd1e347ba2e19ec173.json",
+					"jsonFile" : "target-testVecteur-Debug-52ea268702b682c25b56.json",
 					"name" : "testVecteur",
 					"projectIndex" : 0
 				}

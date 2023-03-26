@@ -1,0 +1,43 @@
+[
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/particules.dir/Particule.cxx.o -c /home/antonin/cpp/src/Particule.cxx",
+  "file": "/home/antonin/cpp/src/Particule.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/particules.dir/Vecteur.cxx.o -c /home/antonin/cpp/src/Vecteur.cxx",
+  "file": "/home/antonin/cpp/src/Vecteur.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/particules.dir/Univers.cxx.o -c /home/antonin/cpp/src/Univers.cxx",
+  "file": "/home/antonin/cpp/src/Univers.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testParticule.dir/TestParticule.cxx.o -c /home/antonin/cpp/test/TestParticule.cxx",
+  "file": "/home/antonin/cpp/test/TestParticule.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/haley.dir/Haley.cxx.o -c /home/antonin/cpp/test/Haley.cxx",
+  "file": "/home/antonin/cpp/test/Haley.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testUnivers.dir/TestUnivers.cxx.o -c /home/antonin/cpp/test/TestUnivers.cxx",
+  "file": "/home/antonin/cpp/test/TestUnivers.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testVecteur.dir/TestVecteur.cxx.o -c /home/antonin/cpp/test/TestVecteur.cxx",
+  "file": "/home/antonin/cpp/test/TestVecteur.cxx"
+}
+]
