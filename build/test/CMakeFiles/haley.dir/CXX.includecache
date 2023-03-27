@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+../include/Cellule.hxx
+list
+-
+Particule.hxx
+../include/Particule.hxx
+Vecteur.hxx
+../include/Vecteur.hxx
+
 ../include/Particule.hxx
 Vecteur.hxx
 ../include/Vecteur.hxx
@@ -19,9 +27,13 @@ Vecteur.hxx
 ../include/Vecteur.hxx
 Particule.hxx
 ../include/Particule.hxx
+Cellule.hxx
+../include/Cellule.hxx
 vector
 -
 list
+-
+map
 -
 
 ../include/Vecteur.hxx

@@ -37,15 +37,14 @@ Vecteur Particule::forceParticule(Particule particule)
 {
     Vecteur direction = position.getDirection(particule.getPosition());
     direction.multiplyScalar(masse * particule.getMasse());
-    direction.multiplyScalar(pow(position.computeDistance(particule.getPosition()), -3));
-    direction.addVectors(force);
+    direction.multiplyScalar(1 / pow(position.computeDistance(particule.getPosition()), 3));
     return direction;
 }
 
 void Particule::updatePosition(double gammaT)
 {
     Vecteur fParticule = force;
-    fParticule.multiplyScalar(0.5 * masse * gammaT);
+    fParticule.multiplyScalar(0.5 / masse * gammaT);
     fParticule.addVectors(vitesse);
     fParticule.multiplyScalar(gammaT);
     position.addVectors(fParticule);
@@ -55,7 +54,7 @@ void Particule::updateVitesse(double gammaT, Vecteur fOld)
 {
     Vecteur fParticule = force;
     fParticule.addVectors(fOld);
-    fParticule.multiplyScalar(0.5 * gammaT * masse);
+    fParticule.multiplyScalar(0.5 * gammaT / masse);
     vitesse.addVectors(fParticule);
 }
 

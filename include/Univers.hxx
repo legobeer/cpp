@@ -29,7 +29,9 @@ public:
 
     void creerCellules();
 
-    void stromerVerlet(vector<Vecteur> &, double, double);
+    void addParticule(Particule);
+
+    void stromerVerlet(vector<Vecteur>, double, double);
 
     void initialisationForces();
 

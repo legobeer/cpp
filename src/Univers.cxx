@@ -42,43 +42,49 @@ list<Particule> Univers::getParticules() { return particules; }
 
 int Univers::getNombreParticules() { return nombreParticules; }
 
-void Univers::stromerVerlet(vector<Vecteur> &fOld, double tEnd, double gammaT)
+void Univers::stromerVerlet(vector<Vecteur> fOld, double tEnd, double gammaT)
 {
     /* Initialisation des forces */
     initialisationForces();
     double t = 0;
-    int i = 0;
     while (t < tEnd)
     {
         t += gammaT;
         for (Particule &particule : particules)
         {
             particule.updatePosition(gammaT);
-            fOld[i] = *particule.getForce();
-            i++;
+            fOld[particule.getId()] = *particule.getForce();
+            *particule.getForce() = Vecteur();
         }
         /* Calcul des forces */
         initialisationForces();
-        i = 0;
         for (Particule &particule : particules)
         {
-            particule.updateVitesse(gammaT, fOld[i]);
-            i++;
+            if (particule.getId() == 2)
+            {
+                cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << endl;
+            }
+            particule.updateVitesse(gammaT, fOld[particule.getId()]);
         }
     }
 }
 
-void Univers::creerCellules()
+void Univers::addParticule(Particule p)
 {
-    Vecteur coordonnees;
-    for (Particule &particule : particules)
-    {
-        coordonnees = particule.getPosition().attributionMaillage(rCut);
-        /* Check if the key is in the map */
-        cellules[coordonnees].addParticule(particule);
-    }
-    /* We have to compute all the neighboors */
+    this->particules.push_back(p);
 }
+
+// void Univers::creerCellules()
+// {
+//     Vecteur coordonnees;
+//     for (Particule &particule : particules)
+//     {
+//         coordonnees = particule.getPosition().attributionMaillage(rCut);
+//         /* Check if the key is in the map */
+//         cellules[coordonnees].addParticule(particule);
+//     }
+//     /* We have to compute all the neighboors */
+// }
 
 void Univers::initialisationForces()
 {
