@@ -125,6 +125,60 @@ particules/fast:
 	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/build
 .PHONY : particules/fast
 
+Cellule.o: Cellule.cxx.o
+
+.PHONY : Cellule.o
+
+# target to build an object file
+Cellule.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Cellule.cxx.o
+.PHONY : Cellule.cxx.o
+
+Cellule.i: Cellule.cxx.i
+
+.PHONY : Cellule.i
+
+# target to preprocess a source file
+Cellule.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Cellule.cxx.i
+.PHONY : Cellule.cxx.i
+
+Cellule.s: Cellule.cxx.s
+
+.PHONY : Cellule.s
+
+# target to generate assembly for a file
+Cellule.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Cellule.cxx.s
+.PHONY : Cellule.cxx.s
+
+Euler.o: Euler.cxx.o
+
+.PHONY : Euler.o
+
+# target to build an object file
+Euler.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Euler.cxx.o
+.PHONY : Euler.cxx.o
+
+Euler.i: Euler.cxx.i
+
+.PHONY : Euler.i
+
+# target to preprocess a source file
+Euler.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Euler.cxx.i
+.PHONY : Euler.cxx.i
+
+Euler.s: Euler.cxx.s
+
+.PHONY : Euler.s
+
+# target to generate assembly for a file
+Euler.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f src/CMakeFiles/particules.dir/build.make src/CMakeFiles/particules.dir/Euler.cxx.s
+.PHONY : Euler.cxx.s
+
 Particule.o: Particule.cxx.o
 
 .PHONY : Particule.o
@@ -215,6 +269,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... particules"
+	@echo "... Cellule.o"
+	@echo "... Cellule.i"
+	@echo "... Cellule.s"
+	@echo "... Euler.o"
+	@echo "... Euler.i"
+	@echo "... Euler.s"
 	@echo "... Particule.o"
 	@echo "... Particule.i"
 	@echo "... Particule.s"

@@ -10,8 +10,6 @@ private:
     list<Vecteur> cellulesVoisines;
 
 public:
-    Cellule(list<Particule>, list<Vecteur>);
-
     list<Particule> getParticules();
 
     list<Vecteur> getCellulesVoisines();

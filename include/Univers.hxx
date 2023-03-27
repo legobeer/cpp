@@ -4,7 +4,8 @@
 #include "Cellule.hxx"
 #include <vector>
 #include <list>
-#include <map>
+#include <unordered_map>
+#include <bits/stdc++.h>
 
 class Univers
 {
@@ -14,20 +15,22 @@ private:
     Vecteur borneInf;
     Vecteur borneSup;
     int nombreDimension;
-    double lD;
+    Vecteur lD;
     double rCut;
-    map<Vecteur, Cellule> cellules;
+    unordered_map<int, Cellule> cellules;
 
 public:
     Univers(int, Vecteur, Vecteur, int);
 
-    Univers(int, Vecteur, Vecteur, int, double, double);
+    Univers(int, Vecteur, Vecteur, int, double);
 
     list<Particule> getParticules();
 
     int getNombreParticules();
 
     void creerCellules();
+
+    void creerVoisinsCellules();
 
     void addParticule(Particule);
 

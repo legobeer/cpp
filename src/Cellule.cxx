@@ -2,12 +2,6 @@
 #include "Cellule.hxx"
 #include <list>
 
-Cellule::Cellule(list<Particule> particules, list<Vecteur> cellulesVoisines)
-{
-    this->cellulesVoisines = cellulesVoisines;
-    this->particules = particules;
-}
-
 list<Particule> Cellule::getParticules()
 {
     return this->particules;

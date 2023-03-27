@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 ../include/Vecteur.hxx
+list
+-
 
 /home/antonin/cpp/test/TestVecteur.cxx
 Vecteur.hxx

@@ -89,7 +89,47 @@ double Vecteur::computeDistance(Vecteur vecteur)
     return pow(distance, 0.5);
 }
 
+list<Vecteur> Vecteur::getVoisins(int nombreDimension)
+{
+    int y, z = 0;
+    list<Vecteur> voisins;
+    for (int x = -1; x < 2; x++)
+    {
+        if (nombreDimension > 1)
+        {
+            for (y = -1; y < 2; y++)
+            {
+                for (z = -1; z < 2; z++)
+                {
+                    if (nombreDimension == 1 && x != 0)
+                        voisins.push_back(Vecteur(this->x - x));
+                    else if (nombreDimension == 2 && x != 0 && y != 0)
+                        voisins.push_back(Vecteur(this->x - x, this->y - y));
+                    else if (nombreDimension == 3 && x != 0 && y != 0 && z != 0)
+                        voisins.push_back(Vecteur(this->x - x, this->y - y, this->z - z));
+                }
+            }
+        }
+    }
+    return voisins;
+}
+
+int Vecteur::hashCode(Vecteur lD)
+{
+    return (int)(lD.getX() * lD.getY() * z + y * lD.getX() + x);
+}
+
 void Vecteur::displayVector()
 {
     cout << "(" << x << ", " << y << ", " << z << ")\n";
+}
+
+Vecteur intToVecteur(Vecteur lD, int hashCode)
+{
+    int z = hashCode / (lD.getX() * lD.getY());
+    hashCode -= z * lD.getX() * lD.getY();
+    int y = hashCode / lD.getX();
+    hashCode -= y * lD.getX();
+    int x = hashCode;
+    return Vecteur(x, y, z);
 }

@@ -1,4 +1,7 @@
 #pragma once
+#include <list>
+
+using namespace std;
 class Vecteur
 {
 private:
@@ -34,9 +37,15 @@ public:
 
     Vecteur attributionMaillage(double);
 
+    list<Vecteur> getVoisins(int);
+
     double computeDistance(Vecteur);
 
     Vecteur getDirection(Vecteur);
 
     void displayVector();
+
+    int hashCode(Vecteur);
 };
+
+Vecteur intToVecteur(Vecteur, int);

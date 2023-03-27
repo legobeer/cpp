@@ -1,6 +1,7 @@
 #include "Univers.hxx"
 #include "Vecteur.hxx"
 #include "Particule.hxx"
+#include "Cellule.hxx"
 #include <vector>
 #include <list>
 #include <iostream>
@@ -14,7 +15,11 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
-    this->lD = 0;
+    borneInf.multiplyScalar(-1);
+    Vecteur tmp = Vecteur();
+    tmp.addVectors(borneSup);
+    tmp.addVectors(borneInf);
+    this->lD = tmp;
     this->rCut = 0;
     for (int i = 0; i < nombreParticules; i++)
     {
@@ -22,13 +27,17 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     }
 }
 
-Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int nombreDimension, double lD, double rCut)
+Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int nombreDimension, double rCut)
 {
     this->nombreParticules = nombreParticules;
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
-    this->lD = lD;
+    borneInf.multiplyScalar(-1);
+    Vecteur tmp = Vecteur();
+    tmp.addVectors(borneSup);
+    tmp.addVectors(borneInf);
+    this->lD = tmp;
     this->rCut = rCut;
     for (int i = 0; i < nombreParticules; i++)
     {
@@ -60,10 +69,9 @@ void Univers::stromerVerlet(vector<Vecteur> fOld, double tEnd, double gammaT)
         initialisationForces();
         for (Particule &particule : particules)
         {
-            if (particule.getId() == 2)
-            {
-                cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << endl;
-            }
+            /* À décommenter pour afficher une ellipse */
+            // if (particule.getId() == 0)
+            //     cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << endl;
             particule.updateVitesse(gammaT, fOld[particule.getId()]);
         }
     }
@@ -74,17 +82,35 @@ void Univers::addParticule(Particule p)
     this->particules.push_back(p);
 }
 
-// void Univers::creerCellules()
-// {
-//     Vecteur coordonnees;
-//     for (Particule &particule : particules)
-//     {
-//         coordonnees = particule.getPosition().attributionMaillage(rCut);
-//         /* Check if the key is in the map */
-//         cellules[coordonnees].addParticule(particule);
-//     }
-//     /* We have to compute all the neighboors */
-// }
+void Univers::creerCellules()
+{
+    Vecteur coordonnees;
+    for (Particule &particule : particules)
+    {
+        coordonnees = particule.getPosition().attributionMaillage(rCut);
+        cellules[coordonnees.hashCode(lD)].addParticule(particule);
+    }
+    /* We have to compute all the neighboors */
+    // creerVoisinsCellules();
+}
+
+void Univers::creerVoisinsCellules()
+{
+    list<Vecteur> voisins;
+    Vecteur coordonnes;
+    int hash;
+    for (auto p = cellules.begin(); p != cellules.end(); p++)
+    {
+        hash = p->first;
+        coordonnes = intToVecteur(lD, hash);
+        voisins = coordonnes.getVoisins(nombreDimension);
+        for (Vecteur voisin : voisins)
+        {
+            if (cellules.find(voisin.hashCode(lD)) != cellules.end())
+                cellules[hash].addCelluleVoisine(voisin);
+        }
+    }
+}
 
 void Univers::initialisationForces()
 {
