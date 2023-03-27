@@ -12,9 +12,13 @@ private:
     Vecteur borneInf;
     Vecteur borneSup;
     int nombreDimension;
+    double lD;
+    double rCut;
 
 public:
     Univers(int, Vecteur, Vecteur, int);
+
+    Univers(int, Vecteur, Vecteur, int, double, double);
 
     list<Particule> &getParticules();
 

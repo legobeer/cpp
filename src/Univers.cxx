@@ -14,6 +14,22 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
+    this->lD = 0;
+    this->rCut = 0;
+    for (int i = 0; i < nombreParticules; i++)
+    {
+        this->particules.push_back(creerParticule(borneInf, borneSup, nombreDimension, i));
+    }
+}
+
+Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int nombreDimension, double lD, double rCut)
+{
+    this->nombreParticules = nombreParticules;
+    this->borneInf = borneInf;
+    this->borneSup = borneSup;
+    this->nombreDimension = nombreDimension;
+    this->lD = lD;
+    this->rCut = rCut;
     for (int i = 0; i < nombreParticules; i++)
     {
         this->particules.push_back(creerParticule(borneInf, borneSup, nombreDimension, i));

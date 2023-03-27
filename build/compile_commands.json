@@ -19,6 +19,18 @@
 
 {
   "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/particules.dir/Euler.cxx.o -c /home/antonin/cpp/src/Euler.cxx",
+  "file": "/home/antonin/cpp/src/Euler.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o src/CMakeFiles/particules.dir/Cellule.cxx.o -c /home/antonin/cpp/src/Cellule.cxx",
+  "file": "/home/antonin/cpp/src/Cellule.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
   "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testParticule.dir/TestParticule.cxx.o -c /home/antonin/cpp/test/TestParticule.cxx",
   "file": "/home/antonin/cpp/test/TestParticule.cxx"
 },
