@@ -1,8 +1,10 @@
 #pragma once
 #include "Vecteur.hxx"
 #include "Particule.hxx"
+#include "Cellule.hxx"
 #include <vector>
 #include <list>
+#include <map>
 
 class Univers
 {
@@ -14,15 +16,18 @@ private:
     int nombreDimension;
     double lD;
     double rCut;
+    map<Vecteur, Cellule> cellules;
 
 public:
     Univers(int, Vecteur, Vecteur, int);
 
     Univers(int, Vecteur, Vecteur, int, double, double);
 
-    list<Particule> &getParticules();
+    list<Particule> getParticules();
 
     int getNombreParticules();
+
+    void creerCellules();
 
     void stromerVerlet(vector<Vecteur> &, double, double);
 

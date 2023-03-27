@@ -37,6 +37,12 @@ double Vecteur::getY() { return y; }
 
 double Vecteur::getZ() { return z; }
 
+void Vecteur::setXInt(int x) { this->x = x; }
+
+void Vecteur::setYInt(int y) { this->y = y; }
+
+void Vecteur::setZInt(int z) { this->z = z; }
+
 void Vecteur::setVecteur(Vecteur vecteur) { *this = vecteur; }
 
 void Vecteur::multiplyScalar(double scalar)
@@ -58,6 +64,15 @@ void Vecteur::subVectors(Vecteur vecteur)
     x -= vecteur.getX();
     y -= vecteur.getY();
     z -= vecteur.getZ();
+}
+
+Vecteur Vecteur::attributionMaillage(double rCut)
+{
+    Vecteur maillage = (*this);
+    maillage.setXInt((int)(maillage.getX() / rCut));
+    maillage.setYInt((int)(maillage.getY() / rCut));
+    maillage.setZInt((int)(maillage.getZ() / rCut));
+    return maillage;
 }
 
 Vecteur Vecteur::getDirection(Vecteur vecteur)

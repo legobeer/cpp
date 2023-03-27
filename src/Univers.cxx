@@ -38,7 +38,7 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
 
 /* Constructor used for make the test of Stromer-Verlet TP2 */
 
-list<Particule> &Univers::getParticules() { return particules; }
+list<Particule> Univers::getParticules() { return particules; }
 
 int Univers::getNombreParticules() { return nombreParticules; }
 
@@ -66,6 +66,18 @@ void Univers::stromerVerlet(vector<Vecteur> &fOld, double tEnd, double gammaT)
             i++;
         }
     }
+}
+
+void Univers::creerCellules()
+{
+    Vecteur coordonnees;
+    for (Particule &particule : particules)
+    {
+        coordonnees = particule.getPosition().attributionMaillage(rCut);
+        /* Check if the key is in the map */
+        cellules[coordonnees].addParticule(particule);
+    }
+    /* We have to compute all the neighboors */
 }
 
 void Univers::initialisationForces()

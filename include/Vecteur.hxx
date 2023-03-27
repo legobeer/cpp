@@ -18,6 +18,12 @@ public:
 
     double getZ();
 
+    void setXInt(int);
+
+    void setYInt(int);
+
+    void setZInt(int);
+
     void setVecteur(Vecteur);
 
     void multiplyScalar(double);
@@ -25,6 +31,8 @@ public:
     void addVectors(Vecteur);
 
     void subVectors(Vecteur);
+
+    Vecteur attributionMaillage(double);
 
     double computeDistance(Vecteur);
 

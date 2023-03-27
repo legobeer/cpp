@@ -1,21 +1,22 @@
 #pragma once
 #include <list>
 #include "Particule.hxx"
+#include "Vecteur.hxx"
 
 class Cellule
 {
 private:
     list<Particule> particules;
-    list<Cellule> cellulesVoisines;
+    list<Vecteur> cellulesVoisines;
 
 public:
-    Cellule(list<Particule>, list<Cellule>);
+    Cellule(list<Particule>, list<Vecteur>);
 
     list<Particule> getParticules();
 
-    list<Cellule> getCellulesVoisines();
+    list<Vecteur> getCellulesVoisines();
 
     void addParticule(Particule particule);
 
-    void addCelluleVoisine(Cellule celluleVoisine);
+    void addCelluleVoisine(Vecteur celluleVoisine);
 };
