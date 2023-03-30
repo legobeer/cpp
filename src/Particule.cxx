@@ -37,6 +37,7 @@ Vecteur Particule::getPosition() { return position; }
 Vecteur Particule::getForce() { return force; }
 int Particule::getId() { return id; }
 double Particule::getMasse() { return masse; }
+int Particule::getType() { return type; }
 
 void Particule::setForce(Vecteur force) { this->force = force; }
 

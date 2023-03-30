@@ -26,6 +26,7 @@ public:
     Vecteur getForce();
     int getId();
     double getMasse();
+    int getType();
 
     void setForce(Vecteur force);
 

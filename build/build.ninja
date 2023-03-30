@@ -289,12 +289,12 @@ build test/install/local: phony test/CMakeFiles/install/local.util
 #############################################
 # Order-only phony target for testParticule
 
-build cmake_object_order_depends_target_testParticule: phony || cmake_object_order_depends_target_particules
+build cmake_object_order_depends_target_testParticule: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_particules
 
 build test/CMakeFiles/testParticule.dir/TestParticule.cxx.o: CXX_COMPILER__testParticule ../test/TestParticule.cxx || cmake_object_order_depends_target_testParticule
   DEP_FILE = test/CMakeFiles/testParticule.dir/TestParticule.cxx.o.d
   FLAGS = -Wall -g   -std=gnu++17
-  INCLUDES = -I../include
+  INCLUDES = -I../include -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest
   OBJECT_DIR = test/CMakeFiles/testParticule.dir
   OBJECT_FILE_DIR = test/CMakeFiles/testParticule.dir
 
@@ -306,9 +306,9 @@ build test/CMakeFiles/testParticule.dir/TestParticule.cxx.o: CXX_COMPILER__testP
 #############################################
 # Link the executable test/testParticule
 
-build test/testParticule: CXX_EXECUTABLE_LINKER__testParticule test/CMakeFiles/testParticule.dir/TestParticule.cxx.o | src/libparticules.a || src/libparticules.a
+build test/testParticule: CXX_EXECUTABLE_LINKER__testParticule test/CMakeFiles/testParticule.dir/TestParticule.cxx.o | src/libparticules.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a src/libparticules.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = src/libparticules.a
+  LINK_LIBRARIES = src/libparticules.a  lib/libgtest_main.a  lib/libgtest.a  -lpthread
   OBJECT_DIR = test/CMakeFiles/testParticule.dir
   POST_BUILD = :
   PRE_LINK = :

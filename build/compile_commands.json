@@ -31,7 +31,7 @@
 
 {
   "directory": "/home/antonin/cpp/build",
-  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testParticule.dir/TestParticule.cxx.o -c /home/antonin/cpp/test/TestParticule.cxx",
+  "command": "/usr/bin/c++   -I../include -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testParticule.dir/TestParticule.cxx.o -c /home/antonin/cpp/test/TestParticule.cxx",
   "file": "/home/antonin/cpp/test/TestParticule.cxx"
 },
 
