@@ -8,4 +8,5 @@
 /home/antonin/cpp/build/test/CMakeFiles/testParticule.dir
 /home/antonin/cpp/build/test/CMakeFiles/haley.dir
 /home/antonin/cpp/build/test/CMakeFiles/testUnivers.dir
+/home/antonin/cpp/build/test/CMakeFiles/testInteractionFaible.dir
 /home/antonin/cpp/build/test/CMakeFiles/testVecteur.dir

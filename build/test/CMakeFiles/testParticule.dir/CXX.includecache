@@ -13,9 +13,17 @@ list
 -
 vector
 -
+unordered_set
+-
 
 ../include/Vecteur.hxx
 list
+-
+iostream
+-
+string
+-
+bits/stdc++.h
 -
 
 /home/antonin/cpp/test/TestParticule.cxx

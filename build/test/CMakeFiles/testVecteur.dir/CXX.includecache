@@ -9,8 +9,16 @@
 ../include/Vecteur.hxx
 list
 -
+iostream
+-
+string
+-
+bits/stdc++.h
+-
 
 /home/antonin/cpp/test/TestVecteur.cxx
 Vecteur.hxx
 /home/antonin/cpp/test/Vecteur.hxx
+iostream
+-
 

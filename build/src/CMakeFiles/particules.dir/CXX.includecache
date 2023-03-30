@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 ../include/Cellule.hxx
-list
+unordered_set
 -
 Particule.hxx
 ../include/Particule.hxx
@@ -20,6 +20,8 @@ Vecteur.hxx
 list
 -
 vector
+-
+unordered_set
 -
 
 ../include/Univers.hxx
@@ -29,8 +31,6 @@ Particule.hxx
 ../include/Particule.hxx
 Cellule.hxx
 ../include/Cellule.hxx
-vector
--
 list
 -
 unordered_map
@@ -41,13 +41,19 @@ bits/stdc++.h
 ../include/Vecteur.hxx
 list
 -
+iostream
+-
+string
+-
+bits/stdc++.h
+-
 
 /home/antonin/cpp/src/Cellule.cxx
 Particule.hxx
 /home/antonin/cpp/src/Particule.hxx
 Cellule.hxx
 /home/antonin/cpp/src/Cellule.hxx
-list
+unordered_set
 -
 
 /home/antonin/cpp/src/Particule.cxx
@@ -87,8 +93,6 @@ random
 /home/antonin/cpp/src/Vecteur.cxx
 Vecteur.hxx
 /home/antonin/cpp/src/Vecteur.hxx
-iostream
--
 bits/stdc++.h
 -
 
