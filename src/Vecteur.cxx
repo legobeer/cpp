@@ -145,23 +145,3 @@ std::list<Vecteur> Vecteur::getVoisins(int nombreDimension)
     }
     return voisins;
 }
-
-double Vecteur::coordonneesMax()
-{
-    double max = x;
-    if (x < y)
-        max = y;
-    if (max < z)
-        max = z;
-    return max;
-}
-
-double Vecteur::coordonneesMin()
-{
-    double min = x;
-    if (x > y)
-        min = y;
-    if (min > z)
-        min = z;
-    return z;
-}

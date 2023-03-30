@@ -55,7 +55,31 @@
 
 {
   "directory": "/home/antonin/cpp/build",
-  "command": "/usr/bin/c++   -I../include  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testVecteur.dir/TestVecteur.cxx.o -c /home/antonin/cpp/test/TestVecteur.cxx",
+  "command": "/usr/bin/c++   -I../include -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest  -Wall -g   -std=gnu++17 -o test/CMakeFiles/testVecteur.dir/TestVecteur.cxx.o -c /home/antonin/cpp/test/TestVecteur.cxx",
   "file": "/home/antonin/cpp/test/TestVecteur.cxx"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include -isystem ../lib/googletest/googlemock/include -isystem ../lib/googletest/googlemock -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest  -Wall -g   -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17 -o lib/googletest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /home/antonin/cpp/lib/googletest/googlemock/src/gmock_main.cc",
+  "file": "/home/antonin/cpp/lib/googletest/googlemock/src/gmock_main.cc"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include -I../lib/googletest/googlemock/include -I../lib/googletest/googlemock -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest  -Wall -g   -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17 -o lib/googletest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /home/antonin/cpp/lib/googletest/googlemock/src/gmock-all.cc",
+  "file": "/home/antonin/cpp/lib/googletest/googlemock/src/gmock-all.cc"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include -isystem ../lib/googletest/googletest/include -isystem ../lib/googletest/googletest  -Wall -g   -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17 -o lib/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /home/antonin/cpp/lib/googletest/googletest/src/gtest_main.cc",
+  "file": "/home/antonin/cpp/lib/googletest/googletest/src/gtest_main.cc"
+},
+
+{
+  "directory": "/home/antonin/cpp/build",
+  "command": "/usr/bin/c++   -I../include -I../lib/googletest/googletest/include -I../lib/googletest/googletest  -Wall -g   -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17 -o lib/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /home/antonin/cpp/lib/googletest/googletest/src/gtest-all.cc",
+  "file": "/home/antonin/cpp/lib/googletest/googletest/src/gtest-all.cc"
 }
 ]

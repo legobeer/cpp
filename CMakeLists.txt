@@ -24,4 +24,7 @@ add_subdirectory(src)
 ## Ces tests sont unitaires ou fonctionnels
 add_subdirectory(test)
 
+add_subdirectory(lib/googletest)
+
 ## On implémente une démo, un programme de vérification.
+

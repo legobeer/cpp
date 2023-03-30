@@ -1,5 +1,9 @@
+
+
+enable_testing()
+
 add_executable(testVecteur TestVecteur.cxx)
-target_link_libraries(testVecteur particules)
+target_link_libraries(testVecteur particules gtest_main)
 
 add_executable(testInteractionFaible testInteractionFaible.cxx)
 target_link_libraries(testInteractionFaible particules)
@@ -12,3 +16,7 @@ target_link_libraries(haley particules)
 
 add_executable(testParticule TestParticule.cxx)
 target_link_libraries(testParticule particules)
+
+include(GoogleTest)
+
+gtest_discover_tests(testVecteur)

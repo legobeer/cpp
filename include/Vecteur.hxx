@@ -58,10 +58,6 @@ public:
 
     Vecteur getDirection(Vecteur);
 
-    double coordonneesMax();
-
-    double coordonneesMin();
-
     struct HashVecteur
     {
         size_t operator()(const Vecteur &vecteur) const
