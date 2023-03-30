@@ -1,6 +1,9 @@
 add_executable(testVecteur TestVecteur.cxx)
 target_link_libraries(testVecteur particules)
 
+add_executable(testInteractionFaible testInteractionFaible.cxx)
+target_link_libraries(testInteractionFaible particules)
+
 add_executable(testUnivers TestUnivers.cxx)
 target_link_libraries(testUnivers particules)
 

@@ -2,8 +2,7 @@
 #include "Vecteur.hxx"
 #include <list>
 #include <vector>
-
-using namespace std;
+#include <unordered_set>
 
 class Particule
 {
@@ -16,21 +15,33 @@ private:
     int id;
 
 public:
-    Particule(Vecteur, double, int, int);
+    Particule(Vecteur, double, int, int, Vecteur = 0);
 
-    Particule(Vecteur, Vecteur, double, int, int);
+    bool operator==(const Particule &) const;
+
+    friend std::ostream &operator<<(std::ostream &, const Particule &);
 
     Vecteur getVitesse();
     Vecteur getPosition();
-    Vecteur *getForce();
+    Vecteur getForce();
     int getId();
     double getMasse();
 
-    Vecteur forceParticule(Particule);
+    void setForce(Vecteur force);
 
     void updatePosition(double);
 
     void updateVitesse(double, Vecteur);
 
-    void display();
+    struct HashParticule
+    {
+        size_t operator()(const Particule &particule) const
+        {
+            return particule.id;
+        }
+    };
+
+    Vecteur forceInteractionFaible(double rCut, std::unordered_set<Particule, HashParticule> particules, double epsilon = 5, double sigma = 1);
+
+    Vecteur forceGravitationnelleParticule(Particule);
 };

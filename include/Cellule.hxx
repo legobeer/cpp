@@ -1,20 +1,24 @@
 #pragma once
-#include <list>
+#include <unordered_set>
 #include "Particule.hxx"
 #include "Vecteur.hxx"
 
 class Cellule
 {
 private:
-    list<Particule> particules;
-    list<Vecteur> cellulesVoisines;
+    std::unordered_set<Particule, Particule::HashParticule> particules;
+    std::unordered_set<Vecteur, Vecteur::HashVecteur> cellulesVoisines;
 
 public:
-    list<Particule> getParticules();
+    std::unordered_set<Particule, Particule::HashParticule> getParticules();
 
-    list<Vecteur> getCellulesVoisines();
+    std::unordered_set<Vecteur, Vecteur::HashVecteur> getCellulesVoisines();
 
-    void addParticule(Particule particule);
+    void addParticule(Particule);
 
-    void addCelluleVoisine(Vecteur celluleVoisine);
+    void addCelluleVoisine(Vecteur);
+
+    void deleteParticule(Particule);
+
+    void deleteVoisin(Vecteur);
 };

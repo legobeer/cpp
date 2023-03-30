@@ -2,7 +2,6 @@
 #include "Vecteur.hxx"
 #include "Particule.hxx"
 #include "Cellule.hxx"
-#include <vector>
 #include <list>
 #include <unordered_map>
 #include <bits/stdc++.h>
@@ -10,21 +9,26 @@
 class Univers
 {
 private:
-    list<Particule> particules;
+    std::list<Particule> particules;
     int nombreParticules;
     Vecteur borneInf;
     Vecteur borneSup;
     int nombreDimension;
     Vecteur lD;
     double rCut;
-    unordered_map<int, Cellule> cellules;
+    double sigma;
+    double epsilon;
+    std::unordered_map<Vecteur, Cellule, Vecteur::HashVecteur>
+        cellules;
 
 public:
     Univers(int, Vecteur, Vecteur, int);
 
     Univers(int, Vecteur, Vecteur, int, double);
 
-    list<Particule> getParticules();
+    friend std::ostream &operator<<(std::ostream &, const Univers &);
+
+    std::list<Particule> getParticules();
 
     int getNombreParticules();
 
@@ -32,13 +36,17 @@ public:
 
     void creerVoisinsCellules();
 
+    void updateMaillage();
+
     void addParticule(Particule);
 
-    void stromerVerlet(vector<Vecteur>, double, double);
+    void stromerVerlet(std::vector<Vecteur>, double, double);
 
-    void initialisationForces();
+    void calculForcesGravitationnelles();
 
-    void display();
+    void calculForces();
+
+    void calculForcesInteractionsFaibles();
 };
 
 Particule creerParticule(Vecteur, Vecteur, int, int);

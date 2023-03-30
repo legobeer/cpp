@@ -1,28 +1,5 @@
 #include "Vecteur.hxx"
-#include <iostream>
 #include <bits/stdc++.h>
-using namespace std;
-
-Vecteur::Vecteur()
-{
-    this->x = 0;
-    this->y = 0;
-    this->z = 0;
-}
-
-Vecteur::Vecteur(double x)
-{
-    this->x = x;
-    this->y = 0;
-    this->z = 0;
-}
-
-Vecteur::Vecteur(double x, double y)
-{
-    this->x = x;
-    this->y = y;
-    this->z = 0;
-}
 
 Vecteur::Vecteur(double x, double y, double z)
 {
@@ -45,25 +22,82 @@ void Vecteur::setZInt(int z) { this->z = z; }
 
 void Vecteur::setVecteur(Vecteur vecteur) { *this = vecteur; }
 
-void Vecteur::multiplyScalar(double scalar)
+Vecteur Vecteur::operator+(const Vecteur &rhs)
 {
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
+    Vecteur lhs = *this;
+    lhs += rhs;
+    return lhs;
 }
 
-void Vecteur::addVectors(Vecteur vecteur)
+Vecteur Vecteur::operator-(const Vecteur &rhs)
 {
-    x += vecteur.getX();
-    y += vecteur.getY();
-    z += vecteur.getZ();
+    Vecteur lhs = *this;
+    lhs -= rhs;
+    return lhs;
 }
 
-void Vecteur::subVectors(Vecteur vecteur)
+Vecteur &Vecteur::operator*=(const Vecteur &rhs)
 {
-    x -= vecteur.getX();
-    y -= vecteur.getY();
-    z -= vecteur.getZ();
+    x *= rhs.x;
+    y *= rhs.y;
+    z *= rhs.z;
+    return *this;
+}
+
+Vecteur Vecteur::operator-() const
+{
+    return Vecteur(-x, -y, -z);
+}
+
+Vecteur &Vecteur::operator-=(const Vecteur &rhs)
+{
+    *this += -rhs;
+    return *this;
+}
+
+Vecteur &Vecteur::operator+=(const Vecteur &rhs)
+{
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+    return *this;
+}
+
+Vecteur &Vecteur::operator*=(double scalaire)
+{
+    x *= scalaire;
+    y *= scalaire;
+    z *= scalaire;
+    return *this;
+}
+
+Vecteur Vecteur::operator*(double scalaire)
+{
+    Vecteur lhs = *this;
+    lhs *= scalaire;
+    return lhs;
+}
+
+Vecteur &Vecteur::operator=(double v)
+{
+    x = v;
+    y = v;
+    z = v;
+    return *this;
+}
+
+bool Vecteur::operator==(const Vecteur &otherVecteur) const
+{
+    if (this->x == otherVecteur.x && this->y == otherVecteur.y && this->z == otherVecteur.z)
+        return true;
+    else
+        return false;
+};
+
+std::ostream &operator<<(std::ostream &os, const Vecteur &v)
+{
+    std::cout << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+    return os;
 }
 
 Vecteur Vecteur::attributionMaillage(double rCut)
@@ -77,22 +111,20 @@ Vecteur Vecteur::attributionMaillage(double rCut)
 
 Vecteur Vecteur::getDirection(Vecteur vecteur)
 {
-    Vecteur direction = Vecteur();
-    direction.addVectors(vecteur);
-    direction.subVectors(*this);
-    return direction;
+    return vecteur - *this;
 }
 
 double Vecteur::computeDistance(Vecteur vecteur)
 {
-    double distance = pow(vecteur.getX() - x, 2) + pow(vecteur.getY() - y, 2) + pow(vecteur.getZ() - z, 2);
-    return pow(distance, 0.5);
+    Vecteur tmp = (*this - vecteur);
+    tmp *= tmp;
+    return pow(tmp.getX() + tmp.getY() + tmp.getZ(), 0.5);
 }
 
-list<Vecteur> Vecteur::getVoisins(int nombreDimension)
+std::list<Vecteur> Vecteur::getVoisins(int nombreDimension)
 {
     int y, z = 0;
-    list<Vecteur> voisins;
+    std::list<Vecteur> voisins;
     for (int x = -1; x < 2; x++)
     {
         if (nombreDimension > 1)
@@ -114,22 +146,22 @@ list<Vecteur> Vecteur::getVoisins(int nombreDimension)
     return voisins;
 }
 
-int Vecteur::hashCode(Vecteur lD)
+double Vecteur::coordonneesMax()
 {
-    return (int)(lD.getX() * lD.getY() * z + y * lD.getX() + x);
+    double max = x;
+    if (x < y)
+        max = y;
+    if (max < z)
+        max = z;
+    return max;
 }
 
-void Vecteur::displayVector()
+double Vecteur::coordonneesMin()
 {
-    cout << "(" << x << ", " << y << ", " << z << ")\n";
-}
-
-Vecteur intToVecteur(Vecteur lD, int hashCode)
-{
-    int z = hashCode / (lD.getX() * lD.getY());
-    hashCode -= z * lD.getX() * lD.getY();
-    int y = hashCode / lD.getX();
-    hashCode -= y * lD.getX();
-    int x = hashCode;
-    return Vecteur(x, y, z);
+    double min = x;
+    if (x > y)
+        min = y;
+    if (min > z)
+        min = z;
+    return z;
 }

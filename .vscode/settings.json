@@ -8,6 +8,10 @@
         "cmath": "cpp",
         "ostream": "cpp",
         "vector": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "iosfwd": "cpp",
+        "*.tcc": "cpp",
+        "type_traits": "cpp"
     }
 }

@@ -1,7 +1,9 @@
 #pragma once
 #include <list>
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
 
-using namespace std;
 class Vecteur
 {
 private:
@@ -10,10 +12,29 @@ private:
     double z;
 
 public:
-    Vecteur();
-    Vecteur(double);
-    Vecteur(double, double);
-    Vecteur(double, double, double);
+    Vecteur(double = 0, double = 0, double = 0);
+
+    Vecteur operator+(const Vecteur &);
+
+    Vecteur &operator+=(const Vecteur &);
+
+    Vecteur operator-() const;
+
+    Vecteur operator-(const Vecteur &);
+
+    Vecteur &operator*=(double);
+
+    Vecteur operator*(double);
+
+    Vecteur &operator*=(const Vecteur &);
+
+    Vecteur &operator-=(const Vecteur &);
+
+    Vecteur &operator=(double);
+
+    bool operator==(const Vecteur &otherVecteur) const;
+
+    friend std::ostream &operator<<(std::ostream &, const Vecteur &);
 
     double getX();
 
@@ -29,23 +50,30 @@ public:
 
     void setVecteur(Vecteur);
 
-    void multiplyScalar(double);
-
-    void addVectors(Vecteur);
-
-    void subVectors(Vecteur);
-
     Vecteur attributionMaillage(double);
 
-    list<Vecteur> getVoisins(int);
+    std::list<Vecteur> getVoisins(int);
 
     double computeDistance(Vecteur);
 
     Vecteur getDirection(Vecteur);
 
-    void displayVector();
+    double coordonneesMax();
 
-    int hashCode(Vecteur);
+    double coordonneesMin();
+
+    struct HashVecteur
+    {
+        size_t operator()(const Vecteur &vecteur) const
+        {
+            std::string tmp = std::to_string(vecteur.x) + "," + std::to_string(vecteur.y) + "," + std::to_string(vecteur.z);
+
+            int hashCode = 0;
+            for (size_t i = 0; i < tmp.length(); i++)
+            {
+                hashCode += tmp[i] * pow(31, i);
+            }
+            return hashCode;
+        }
+    };
 };
-
-Vecteur intToVecteur(Vecteur, int);

@@ -7,7 +7,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <random>
-using namespace std;
 
 Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int nombreDimension)
 {
@@ -15,14 +14,11 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
-    borneInf.multiplyScalar(-1);
-    Vecteur tmp = Vecteur();
-    tmp.addVectors(borneSup);
-    tmp.addVectors(borneInf);
-    this->lD = tmp;
+    this->lD = borneSup - borneInf;
     this->rCut = 0;
     for (int i = 0; i < nombreParticules; i++)
     {
+        /* TODO constructor */
         this->particules.push_back(creerParticule(borneInf, borneSup, nombreDimension, i));
     }
 }
@@ -33,28 +29,33 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
-    borneInf.multiplyScalar(-1);
-    Vecteur tmp = Vecteur();
-    tmp.addVectors(borneSup);
-    tmp.addVectors(borneInf);
-    this->lD = tmp;
+    this->lD = borneSup - borneInf;
     this->rCut = rCut;
     for (int i = 0; i < nombreParticules; i++)
     {
         this->particules.push_back(creerParticule(borneInf, borneSup, nombreDimension, i));
     }
+    if (rCut == 0)
+        return;
+    creerCellules();
+}
+std::ostream &operator<<(std::ostream &, const Univers &u)
+{
+    for (Particule particule : u.particules)
+        std::cout << particule << std::endl;
+    return std::cout;
 }
 
 /* Constructor used for make the test of Stromer-Verlet TP2 */
 
-list<Particule> Univers::getParticules() { return particules; }
+std::list<Particule> Univers::getParticules() { return particules; }
 
 int Univers::getNombreParticules() { return nombreParticules; }
 
-void Univers::stromerVerlet(vector<Vecteur> fOld, double tEnd, double gammaT)
+void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double gammaT)
 {
     /* Initialisation des forces */
-    initialisationForces();
+    calculForces();
     double t = 0;
     while (t < tEnd)
     {
@@ -62,18 +63,19 @@ void Univers::stromerVerlet(vector<Vecteur> fOld, double tEnd, double gammaT)
         for (Particule &particule : particules)
         {
             particule.updatePosition(gammaT);
-            fOld[particule.getId()] = *particule.getForce();
-            *particule.getForce() = Vecteur();
+            updateMaillage();
+            fOld[particule.getId()] = particule.getForce();
+            particule.setForce(0);
         }
         /* Calcul des forces */
-        initialisationForces();
-        for (Particule &particule : particules)
-        {
-            /* À décommenter pour afficher une ellipse */
-            // if (particule.getId() == 0)
-            //     cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << endl;
-            particule.updateVitesse(gammaT, fOld[particule.getId()]);
-        }
+        calculForces();
+        //     /* À décommenter pour afficher une ellipse */
+        // for (Particule &particule : particules)
+        // {
+        //     // if (particule.getId() == 1)
+        //     //     cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << endl;
+        //     // particule.updateVitesse(gammaT, fOld[particule.getId()]);
+        // }
     }
 }
 
@@ -88,31 +90,92 @@ void Univers::creerCellules()
     for (Particule &particule : particules)
     {
         coordonnees = particule.getPosition().attributionMaillage(rCut);
-        cellules[coordonnees.hashCode(lD)].addParticule(particule);
+        cellules[coordonnees].addParticule(particule);
     }
     /* We have to compute all the neighboors */
-    // creerVoisinsCellules();
+    creerVoisinsCellules();
 }
 
 void Univers::creerVoisinsCellules()
 {
-    list<Vecteur> voisins;
+    std::list<Vecteur> voisins;
     Vecteur coordonnes;
-    int hash;
     for (auto p = cellules.begin(); p != cellules.end(); p++)
     {
-        hash = p->first;
-        coordonnes = intToVecteur(lD, hash);
+        coordonnes = p->first;
         voisins = coordonnes.getVoisins(nombreDimension);
         for (Vecteur voisin : voisins)
         {
-            if (cellules.find(voisin.hashCode(lD)) != cellules.end())
-                cellules[hash].addCelluleVoisine(voisin);
+            if (cellules.find(voisin) != cellules.end())
+                cellules[coordonnes].addCelluleVoisine(voisin);
         }
     }
 }
 
-void Univers::initialisationForces()
+void Univers::calculForces()
+{
+    calculForcesGravitationnelles();
+    calculForcesInteractionsFaibles();
+}
+
+void Univers::updateMaillage()
+{
+    Vecteur coordonnees;
+    for (auto p = cellules.begin(); p != cellules.end(); p++)
+    {
+        for (Particule particule : p->second.getParticules())
+        {
+            if (!(p->first == particule.getPosition().attributionMaillage(rCut)))
+            {
+                /* Il faut changer la position de la particule dans le maillage */
+                p->second.deleteParticule(particule);
+                /* on ajoute la particule au bon endroit */
+                cellules[particule.getPosition().attributionMaillage(rCut)].addParticule(particule);
+                /* On vérifie si la liste des particules n'est pas vide */
+                if (p->second.getParticules().size() == 0)
+                    cellules.erase(p->first);
+            }
+        }
+    }
+    /* Maitenant on va mettre à jour les voisins */
+    std::list<Vecteur> voisinsPossibles;
+    Vecteur tmp;
+    for (auto p = cellules.begin(); p != cellules.end(); p++)
+    {
+        tmp = p->first;
+        voisinsPossibles = tmp.getVoisins(nombreDimension);
+        for (Vecteur voisinPotentiel : voisinsPossibles)
+        {
+            if (cellules.find(voisinPotentiel) != cellules.end() && !(p->second.getCellulesVoisines().find(voisinPotentiel) != p->second.getCellulesVoisines().end()))
+                p->second.addCelluleVoisine(voisinPotentiel);
+            else if (p->second.getCellulesVoisines().find(voisinPotentiel) != p->second.getCellulesVoisines().end() && !(cellules.find(voisinPotentiel) != cellules.end()))
+                p->second.deleteVoisin(voisinPotentiel);
+        }
+    }
+}
+
+void Univers::calculForcesInteractionsFaibles()
+{
+    Vecteur coordonnees;
+    Vecteur force;
+    for (auto p = cellules.begin(); p != cellules.end(); p++)
+    {
+        for (Particule particule : p->second.getParticules())
+        {
+            /* Force avec les particules dans la même maille */
+            force = 0;
+            force += particule.forceInteractionFaible(rCut, p->second.getParticules(), epsilon, sigma);
+            for (Vecteur voisin : p->second.getCellulesVoisines())
+            {
+                force += particule.forceInteractionFaible(rCut, cellules[voisin].getParticules(), epsilon, sigma);
+            }
+            /* Mis à jour de la force d'interaction faible */
+            particule.setForce(particule.getForce() + force);
+        }
+    }
+}
+
+void Univers::calculForcesGravitationnelles()
 {
     int iemeParticule = 0, jiemeParticule;
     Vecteur Fij;
@@ -126,46 +189,39 @@ void Univers::initialisationForces()
                 jiemeParticule++;
                 continue;
             }
-            Fij = particuleI.forceParticule(particuleJ);
-            particuleI.getForce()->addVectors(Fij);
-            Fij.multiplyScalar(-1);
-            particuleJ.getForce()->addVectors(Fij);
+            Fij = particuleI.forceGravitationnelleParticule(particuleJ);
+            particuleI.setForce(particuleI.getForce() + Fij);
+            particuleJ.setForce(particuleJ.getForce() - Fij);
             jiemeParticule++;
         }
         iemeParticule++;
     }
 }
 
-void Univers::display()
-{
-    for (Particule particule : particules)
-        particule.display();
-}
-
 Particule creerParticule(Vecteur borneInf, Vecteur borneSup, int nombreDimension, int id)
 {
-    random_device rd;
-    mt19937 mt(rd());
+    std::random_device rd;
+    std::mt19937 mt(rd());
     double x = 0, y = 0, z = 0, masse;
     if (nombreDimension > 0)
     {
-        uniform_real_distribution<double> dist(borneInf.getX(), borneSup.getX());
+        std::uniform_real_distribution<double> dist(borneInf.getX(), borneSup.getX());
         x = dist(mt);
-        cout << x << endl;
+        std::cout << x << std::endl;
     }
     if (nombreDimension > 1)
     {
-        uniform_real_distribution<double> dist(borneInf.getY(), borneSup.getY());
+        std::uniform_real_distribution<double> dist(borneInf.getY(), borneSup.getY());
         y = dist(mt);
-        cout << y << endl;
+        std::cout << y << std::endl;
     }
     if (nombreDimension > 2)
     {
-        uniform_real_distribution<double> dist(borneInf.getZ(), borneSup.getZ());
+        std::uniform_real_distribution<double> dist(borneInf.getZ(), borneSup.getZ());
         z = dist(mt);
-        cout << z << endl;
+        std::cout << z << std::endl;
     }
-    uniform_real_distribution<double> dist(0.005, 0.01);
+    std::uniform_real_distribution<double> dist(0.005, 0.01);
     masse = dist(mt);
     return Particule(Vecteur(x, y, z), masse, 0, id);
 }
