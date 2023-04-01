@@ -123,25 +123,29 @@ double Vecteur::computeDistance(Vecteur vecteur)
 
 std::list<Vecteur> Vecteur::getVoisins(int nombreDimension)
 {
-    int y, z = 0;
     std::list<Vecteur> voisins;
-    for (int x = -1; x < 2; x++)
+    for (int xOffset = -1; xOffset < 2; xOffset++)
     {
         if (nombreDimension > 1)
         {
-            for (y = -1; y < 2; y++)
+            for (int yOffset = -1; yOffset < 2; yOffset++)
             {
-                for (z = -1; z < 2; z++)
+                if (nombreDimension > 2)
                 {
-                    if (nombreDimension == 1 && x != 0)
-                        voisins.push_back(Vecteur(this->x - x));
-                    else if (nombreDimension == 2 && x != 0 && y != 0)
-                        voisins.push_back(Vecteur(this->x - x, this->y - y));
-                    else if (nombreDimension == 3 && x != 0 && y != 0 && z != 0)
-                        voisins.push_back(Vecteur(this->x - x, this->y - y, this->z - z));
+                    for (int zOffset = -1; zOffset < 2; zOffset++)
+                    {
+                        if (!(zOffset == 0 && yOffset == 0 && xOffset == 0))
+                            voisins.push_back(Vecteur(x + xOffset, y + yOffset, z + zOffset));
+                    }
+                }
+                else if (!(yOffset == 0 && xOffset == 0))
+                {
+                    voisins.push_back(Vecteur(x + xOffset, y + yOffset, z));
                 }
             }
         }
+        else if (xOffset != 0)
+            voisins.push_back(Vecteur(x + xOffset, y, z));
     }
     return voisins;
 }

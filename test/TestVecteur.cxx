@@ -127,7 +127,7 @@ TEST(VecteurTest, ComputeDistance)
     Vecteur v2(4, 5, 6);
     double distance = v1.computeDistance(v2);
 
-    ASSERT_DOUBLE_EQ(distance, 3.46410161514);
+    ASSERT_DOUBLE_EQ(distance, 5.196152422706632);
 }
 
 TEST(VecteurTest, GetVoisins)
@@ -137,8 +137,14 @@ TEST(VecteurTest, GetVoisins)
     ASSERT_EQ(voisins1.size(), 2);
 
     std::list<Vecteur> voisins2 = v1.getVoisins(2);
-    ASSERT_EQ(voisins2.size(), 4);
+    ASSERT_EQ(voisins2.size(), 8);
 
     std::list<Vecteur> voisins3 = v1.getVoisins(3);
-    ASSERT_EQ(voisins3.size(), 8);
+    ASSERT_EQ(voisins3.size(), 26);
+}
+
+int main(int argc, char **argv)
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

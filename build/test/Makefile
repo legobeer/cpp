@@ -56,6 +56,40 @@ CMAKE_BINARY_DIR = /home/antonin/cpp/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +111,18 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,21 +157,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-test/CMakeFiles/testParticule.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testParticule.dir/rule
-.PHONY : test/CMakeFiles/testParticule.dir/rule
-
-# Convenience name for target.
-testParticule: test/CMakeFiles/testParticule.dir/rule
-
-.PHONY : testParticule
-
-# fast build rule for target.
-testParticule/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
-.PHONY : testParticule/fast
-
-# Convenience name for target.
 test/CMakeFiles/haley.dir/rule:
 	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/haley.dir/rule
 .PHONY : test/CMakeFiles/haley.dir/rule
@@ -154,6 +185,21 @@ testUnivers: test/CMakeFiles/testUnivers.dir/rule
 testUnivers/fast:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testUnivers.dir/build.make test/CMakeFiles/testUnivers.dir/build
 .PHONY : testUnivers/fast
+
+# Convenience name for target.
+test/CMakeFiles/testInteractionFaible.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testInteractionFaible.dir/rule
+.PHONY : test/CMakeFiles/testInteractionFaible.dir/rule
+
+# Convenience name for target.
+testInteractionFaible: test/CMakeFiles/testInteractionFaible.dir/rule
+
+.PHONY : testInteractionFaible
+
+# fast build rule for target.
+testInteractionFaible/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/build
+.PHONY : testInteractionFaible/fast
 
 # Convenience name for target.
 test/CMakeFiles/testVecteur.dir/rule:
@@ -196,33 +242,6 @@ Haley.s: Haley.cxx.s
 Haley.cxx.s:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.s
 .PHONY : Haley.cxx.s
-
-TestParticule.o: TestParticule.cxx.o
-
-.PHONY : TestParticule.o
-
-# target to build an object file
-TestParticule.cxx.o:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.o
-.PHONY : TestParticule.cxx.o
-
-TestParticule.i: TestParticule.cxx.i
-
-.PHONY : TestParticule.i
-
-# target to preprocess a source file
-TestParticule.cxx.i:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.i
-.PHONY : TestParticule.cxx.i
-
-TestParticule.s: TestParticule.cxx.s
-
-.PHONY : TestParticule.s
-
-# target to generate assembly for a file
-TestParticule.cxx.s:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.s
-.PHONY : TestParticule.cxx.s
 
 TestUnivers.o: TestUnivers.cxx.o
 
@@ -278,30 +297,61 @@ TestVecteur.cxx.s:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/TestVecteur.cxx.s
 .PHONY : TestVecteur.cxx.s
 
+testInteractionFaible.o: testInteractionFaible.cxx.o
+
+.PHONY : testInteractionFaible.o
+
+# target to build an object file
+testInteractionFaible.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/testInteractionFaible.cxx.o
+.PHONY : testInteractionFaible.cxx.o
+
+testInteractionFaible.i: testInteractionFaible.cxx.i
+
+.PHONY : testInteractionFaible.i
+
+# target to preprocess a source file
+testInteractionFaible.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/testInteractionFaible.cxx.i
+.PHONY : testInteractionFaible.cxx.i
+
+testInteractionFaible.s: testInteractionFaible.cxx.s
+
+.PHONY : testInteractionFaible.s
+
+# target to generate assembly for a file
+testInteractionFaible.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/testInteractionFaible.cxx.s
+.PHONY : testInteractionFaible.cxx.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/local"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... testParticule"
+	@echo "... install/strip"
 	@echo "... haley"
 	@echo "... testUnivers"
+	@echo "... testInteractionFaible"
 	@echo "... testVecteur"
 	@echo "... Haley.o"
 	@echo "... Haley.i"
 	@echo "... Haley.s"
-	@echo "... TestParticule.o"
-	@echo "... TestParticule.i"
-	@echo "... TestParticule.s"
 	@echo "... TestUnivers.o"
 	@echo "... TestUnivers.i"
 	@echo "... TestUnivers.s"
 	@echo "... TestVecteur.o"
 	@echo "... TestVecteur.i"
 	@echo "... TestVecteur.s"
+	@echo "... testInteractionFaible.o"
+	@echo "... testInteractionFaible.i"
+	@echo "... testInteractionFaible.s"
 .PHONY : help
 
 
