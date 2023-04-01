@@ -1,5 +1,4 @@
 #include "Vecteur.hxx"
-#include <iostream>
 #include <gtest/gtest.h>
 
 TEST(VecteurTest, TestInitialisation1)

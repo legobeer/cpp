@@ -5,6 +5,9 @@ enable_testing()
 add_executable(testVecteur TestVecteur.cxx)
 target_link_libraries(testVecteur particules gtest_main)
 
+add_executable(testCellule TestCellule.cxx)
+target_link_libraries(testCellule particules gtest_main)
+
 add_executable(testInteractionFaible testInteractionFaible.cxx)
 target_link_libraries(testInteractionFaible particules)
 

@@ -217,6 +217,21 @@ testInteractionFaible/fast:
 .PHONY : testInteractionFaible/fast
 
 # Convenience name for target.
+test/CMakeFiles/testCellule.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testCellule.dir/rule
+.PHONY : test/CMakeFiles/testCellule.dir/rule
+
+# Convenience name for target.
+testCellule: test/CMakeFiles/testCellule.dir/rule
+
+.PHONY : testCellule
+
+# fast build rule for target.
+testCellule/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testCellule.dir/build.make test/CMakeFiles/testCellule.dir/build
+.PHONY : testCellule/fast
+
+# Convenience name for target.
 test/CMakeFiles/testVecteur.dir/rule:
 	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testVecteur.dir/rule
 .PHONY : test/CMakeFiles/testVecteur.dir/rule
@@ -257,6 +272,33 @@ Haley.s: Haley.cxx.s
 Haley.cxx.s:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.s
 .PHONY : Haley.cxx.s
+
+TestCellule.o: TestCellule.cxx.o
+
+.PHONY : TestCellule.o
+
+# target to build an object file
+TestCellule.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testCellule.dir/build.make test/CMakeFiles/testCellule.dir/TestCellule.cxx.o
+.PHONY : TestCellule.cxx.o
+
+TestCellule.i: TestCellule.cxx.i
+
+.PHONY : TestCellule.i
+
+# target to preprocess a source file
+TestCellule.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testCellule.dir/build.make test/CMakeFiles/testCellule.dir/TestCellule.cxx.i
+.PHONY : TestCellule.cxx.i
+
+TestCellule.s: TestCellule.cxx.s
+
+.PHONY : TestCellule.s
+
+# target to generate assembly for a file
+TestCellule.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testCellule.dir/build.make test/CMakeFiles/testCellule.dir/TestCellule.cxx.s
+.PHONY : TestCellule.cxx.s
 
 TestParticule.o: TestParticule.cxx.o
 
@@ -382,10 +424,14 @@ help:
 	@echo "... haley"
 	@echo "... testUnivers"
 	@echo "... testInteractionFaible"
+	@echo "... testCellule"
 	@echo "... testVecteur"
 	@echo "... Haley.o"
 	@echo "... Haley.i"
 	@echo "... Haley.s"
+	@echo "... TestCellule.o"
+	@echo "... TestCellule.i"
+	@echo "... TestCellule.s"
 	@echo "... TestParticule.o"
 	@echo "... TestParticule.i"
 	@echo "... TestParticule.s"

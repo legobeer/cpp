@@ -222,6 +222,19 @@ testInteractionFaible/fast:
 .PHONY : testInteractionFaible/fast
 
 #=============================================================================
+# Target rules for targets named testCellule
+
+# Build rule for target.
+testCellule: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testCellule
+.PHONY : testCellule
+
+# fast build rule for target.
+testCellule/fast:
+	$(MAKE) -f test/CMakeFiles/testCellule.dir/build.make test/CMakeFiles/testCellule.dir/build
+.PHONY : testCellule/fast
+
+#=============================================================================
 # Target rules for targets named testVecteur
 
 # Build rule for target.
@@ -303,6 +316,7 @@ help:
 	@echo "... haley"
 	@echo "... testUnivers"
 	@echo "... testInteractionFaible"
+	@echo "... testCellule"
 	@echo "... testVecteur"
 	@echo "... gmock_main"
 	@echo "... gmock"

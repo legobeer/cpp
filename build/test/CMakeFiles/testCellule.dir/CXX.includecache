@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+../include/Cellule.hxx
+unordered_set
+-
+Particule.hxx
+../include/Particule.hxx
+Vecteur.hxx
+../include/Vecteur.hxx
+
+../include/Particule.hxx
+Vecteur.hxx
+../include/Vecteur.hxx
+list
+-
+vector
+-
+unordered_set
+-
+
 ../include/Vecteur.hxx
 list
 -
@@ -424,7 +442,9 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/antonin/cpp/test/TestVecteur.cxx
+/home/antonin/cpp/test/TestCellule.cxx
+Cellule.hxx
+/home/antonin/cpp/test/Cellule.hxx
 Vecteur.hxx
 /home/antonin/cpp/test/Vecteur.hxx
 gtest/gtest.h
