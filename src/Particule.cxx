@@ -59,7 +59,7 @@ Vecteur Particule::forceInteractionFaible(double rCut, std::unordered_set<Partic
         {
             r = position.computeDistance(particule.getPosition());
             if (r < rCut)
-                tmp *= position.getDirection(particule.getPosition()) * (24 * epsilon * (1 - 2 * pow(sigma / r, 6)) * pow(sigma / r, 6) / pow(r, 2));
+                tmp = position.getDirection(particule.getPosition()) * (24 * epsilon * (1 - 2 * pow(sigma / r, 6)) * pow(sigma / r, 6) / pow(r, 2));
             else
                 tmp = 0;
             force += tmp;

@@ -50,11 +50,11 @@ TEST(VecteurTest, TestAddition)
 TEST(VecteurTest, TestSubtraction)
 {
     Vecteur v1(1.0, 2.0, 3.0);
-    Vecteur v2(4.0, 5.0, 6.0);
+    Vecteur v2(4.0, 4.0, 7.0);
     Vecteur v3 = v1 - v2;
     EXPECT_DOUBLE_EQ(v3.getX(), -3.0);
-    EXPECT_DOUBLE_EQ(v3.getY(), -3.0);
-    EXPECT_DOUBLE_EQ(v3.getZ(), -3.0);
+    EXPECT_DOUBLE_EQ(v3.getY(), -2.0);
+    EXPECT_DOUBLE_EQ(v3.getZ(), -4.0);
 }
 
 TEST(VecteurTest, TestMultiplication)
@@ -113,12 +113,12 @@ TEST(VecteurTest, TestMaillage)
 TEST(VecteurTest, GetDirection)
 {
     Vecteur v1(1, 2, 3);
-    Vecteur v2(4, 5, 6);
+    Vecteur v2(4, 3, 7);
     Vecteur direction = v1.getDirection(v2);
 
     ASSERT_EQ(direction.getX(), 3);
-    ASSERT_EQ(direction.getY(), 3);
-    ASSERT_EQ(direction.getZ(), 3);
+    ASSERT_EQ(direction.getY(), 1);
+    ASSERT_EQ(direction.getZ(), 5);
 }
 
 TEST(VecteurTest, ComputeDistance)

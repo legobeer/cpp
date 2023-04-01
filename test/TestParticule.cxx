@@ -42,10 +42,10 @@ TEST(ParticuleTest, OperatorEqualsTest)
 // Test the forceGravitationnelleParticule function of the Particule class
 TEST(ParticuleTest, ForceGravitationnelleParticuleTest)
 {
-    Particule p1(Vecteur(0, 0, 0), 1.0, 0, 1, Vecteur(0, 0, 0));
-    Particule p2(Vecteur(0, 1, 0), 2.0, 0, 2, Vecteur(0, 0, 0));
+    Particule p1(Vecteur(0, 0, 0), 10.0, 0, 1, Vecteur(0, 0, 0));
+    Particule p2(Vecteur(0, 2, 0), 2.0, 0, 2, Vecteur(0, 0, 0));
 
-    Vecteur expected_force(0, 0.002, 0); // calculated by hand
+    Vecteur expected_force(0, 40.0 / 8, 0); // calculated by hand
 
     EXPECT_EQ(p1.forceGravitationnelleParticule(p2), expected_force);
 }
@@ -62,7 +62,7 @@ TEST(ParticuleTest, ForceInteractionFaibleTest1)
     double epsilon = 1.0;
     double sigma = 1.0;
 
-    Vecteur expected_force(0, 0.0005, 0); // calculated by hand
+    Vecteur expected_force(0, -24, 0); // calculated by hand
 
     EXPECT_EQ(p1.forceInteractionFaible(rCut, particules, epsilon, sigma), expected_force);
 }
@@ -84,21 +84,21 @@ TEST(ParticuleTest, ForceInteractionFaibleTest2)
 
 TEST(ParticuleTest, UpdatePositionTest)
 {
-    Particule p(Vecteur(1, 2, 3), 1.0, 0, 0, Vecteur(4, 5, 6));
+    Particule p(Vecteur(1, 2, 3), 10.0, 0, 0, Vecteur(4, 5, 6));
     p.setForce(Vecteur(7, 8, 9));
     double gammaT = 0.1;
     p.updatePosition(gammaT);
-    EXPECT_EQ(p.getPosition(), Vecteur(1.432, 2.704, 4.012));
+    EXPECT_EQ(p.getPosition(), Vecteur(1.4035, 2.504, 3.6045));
 }
 
 TEST(ParticuleTest, UpdateVitesseTest)
 {
-    Particule p(Vecteur(1, 2, 3), 1.0, 0, 0, Vecteur(4, 5, 6));
+    Particule p(Vecteur(1, 2, 3), 100, 0, 0, Vecteur(4, 5, 6));
     p.setForce(Vecteur(7, 8, 9));
     double gammaT = 0.1;
     Vecteur fOld(10, 11, 12);
     p.updateVitesse(gammaT, fOld);
-    EXPECT_EQ(p.getVitesse(), Vecteur(4.696, 5.298, 5.9));
+    EXPECT_EQ(p.getVitesse(), Vecteur(4.0085, 5.0095, 6.0105));
 }
 
 int main(int argc, char **argv)
