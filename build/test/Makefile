@@ -56,18 +56,6 @@ CMAKE_BINARY_DIR = /home/antonin/cpp/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -112,6 +100,18 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -155,6 +155,21 @@ preinstall/fast:
 depend:
 	cd /home/antonin/cpp/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+test/CMakeFiles/testParticule.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testParticule.dir/rule
+.PHONY : test/CMakeFiles/testParticule.dir/rule
+
+# Convenience name for target.
+testParticule: test/CMakeFiles/testParticule.dir/rule
+
+.PHONY : testParticule
+
+# fast build rule for target.
+testParticule/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
+.PHONY : testParticule/fast
 
 # Convenience name for target.
 test/CMakeFiles/haley.dir/rule:
@@ -243,6 +258,33 @@ Haley.cxx.s:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.s
 .PHONY : Haley.cxx.s
 
+TestParticule.o: TestParticule.cxx.o
+
+.PHONY : TestParticule.o
+
+# target to build an object file
+TestParticule.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.o
+.PHONY : TestParticule.cxx.o
+
+TestParticule.i: TestParticule.cxx.i
+
+.PHONY : TestParticule.i
+
+# target to preprocess a source file
+TestParticule.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.i
+.PHONY : TestParticule.cxx.i
+
+TestParticule.s: TestParticule.cxx.s
+
+.PHONY : TestParticule.s
+
+# target to generate assembly for a file
+TestParticule.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/TestParticule.cxx.s
+.PHONY : TestParticule.cxx.s
+
 TestUnivers.o: TestUnivers.cxx.o
 
 .PHONY : TestUnivers.o
@@ -330,11 +372,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/local"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... install/local"
+	@echo "... testParticule"
 	@echo "... install/strip"
 	@echo "... haley"
 	@echo "... testUnivers"
@@ -343,6 +386,9 @@ help:
 	@echo "... Haley.o"
 	@echo "... Haley.i"
 	@echo "... Haley.s"
+	@echo "... TestParticule.o"
+	@echo "... TestParticule.i"
+	@echo "... TestParticule.s"
 	@echo "... TestUnivers.o"
 	@echo "... TestUnivers.i"
 	@echo "... TestUnivers.s"

@@ -48,7 +48,8 @@
 						4,
 						6,
 						7,
-						8
+						8,
+						9
 					]
 				},
 				{
@@ -124,7 +125,8 @@
 						5,
 						6,
 						7,
-						8
+						8,
+						9
 					]
 				},
 				{
@@ -182,7 +184,7 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "gmock_main::@7712283c01f504ef6d93",
-					"jsonFile" : "target-gmock_main-566ba36855188ddc5aa4.json",
+					"jsonFile" : "target-gmock_main-b69cabdd6219dcdd872f.json",
 					"name" : "gmock_main",
 					"projectIndex" : 2
 				},
@@ -219,6 +221,13 @@
 					"id" : "testInteractionFaible::@36f028580bb02cc8272a",
 					"jsonFile" : "target-testInteractionFaible-1a5cdfc667ee12d47a4c.json",
 					"name" : "testInteractionFaible",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "testParticule::@36f028580bb02cc8272a",
+					"jsonFile" : "target-testParticule-fb9a1f0be2af1fd48b1f.json",
+					"name" : "testParticule",
 					"projectIndex" : 0
 				},
 				{

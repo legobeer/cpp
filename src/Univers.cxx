@@ -98,7 +98,7 @@ void Univers::creerCellules()
 
 void Univers::creerVoisinsCellules()
 {
-    std::list<Vecteur> voisins;
+    std::vector<Vecteur> voisins;
     Vecteur coordonnes;
     for (auto p = cellules.begin(); p != cellules.end(); p++)
     {
@@ -138,7 +138,7 @@ void Univers::updateMaillage()
         }
     }
     /* Maitenant on va mettre à jour les voisins */
-    std::list<Vecteur> voisinsPossibles;
+    std::vector<Vecteur> voisinsPossibles;
     Vecteur tmp;
     for (auto p = cellules.begin(); p != cellules.end(); p++)
     {

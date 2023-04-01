@@ -67,7 +67,7 @@ TEST(ParticuleTest, ForceInteractionFaibleTest1)
     EXPECT_EQ(p1.forceInteractionFaible(rCut, particules, epsilon, sigma), expected_force);
 }
 
-TEST(ParticuleTest, ForceInteractionFaibleTest1)
+TEST(ParticuleTest, ForceInteractionFaibleTest2)
 {
     Particule p1(Vecteur(0, 0, 0), 1.0, 0, 1, Vecteur(0, 0, 0));
     Particule p2(Vecteur(0, 1, 0), 2.0, 0, 2, Vecteur(0, 0, 0));
@@ -99,4 +99,10 @@ TEST(ParticuleTest, UpdateVitesseTest)
     Vecteur fOld(10, 11, 12);
     p.updateVitesse(gammaT, fOld);
     EXPECT_EQ(p.getVitesse(), Vecteur(4.696, 5.298, 5.9));
+}
+
+int main(int argc, char **argv)
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

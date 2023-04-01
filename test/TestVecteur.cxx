@@ -133,14 +133,43 @@ TEST(VecteurTest, ComputeDistance)
 TEST(VecteurTest, GetVoisins)
 {
     Vecteur v1(1, 2, 3);
-    std::list<Vecteur> voisins1 = v1.getVoisins(1);
+    std::vector<Vecteur> voisins1 = v1.getVoisins(1);
     ASSERT_EQ(voisins1.size(), 2);
+    ASSERT_EQ(voisins1[0], Vecteur(0, 2, 3));
+    ASSERT_EQ(voisins1[1], Vecteur(2, 2, 3));
 
-    std::list<Vecteur> voisins2 = v1.getVoisins(2);
+    std::vector<Vecteur> voisins2 = v1.getVoisins(2);
     ASSERT_EQ(voisins2.size(), 8);
+    int i = 0;
+    for (int x = -1; x < 2; x++)
+    {
+        for (int y = -1; y < 2; y++)
+        {
+            if (!(y == 0 && x == 0))
+            {
+                ASSERT_EQ(voisins2[i], Vecteur(v1.getX() + x, v1.getY() + y, v1.getZ()));
+                i++;
+            }
+        }
+    }
 
-    std::list<Vecteur> voisins3 = v1.getVoisins(3);
+    std::vector<Vecteur> voisins3 = v1.getVoisins(3);
     ASSERT_EQ(voisins3.size(), 26);
+    i = 0;
+    for (int x = -1; x < 2; x++)
+    {
+        for (int y = -1; y < 2; y++)
+        {
+            for (int z = -1; z < 2; z++)
+            {
+                if (!(y == 0 && x == 0 && z == 0))
+                {
+                    ASSERT_EQ(voisins3[i], Vecteur(v1.getX() + x, v1.getY() + y, v1.getZ() + z));
+                    i++;
+                }
+            }
+        }
+    }
 }
 
 int main(int argc, char **argv)

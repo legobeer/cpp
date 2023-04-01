@@ -52,7 +52,7 @@ public:
 
     Vecteur attributionMaillage(double);
 
-    std::list<Vecteur> getVoisins(int);
+    std::vector<Vecteur> getVoisins(int);
 
     double computeDistance(Vecteur);
 

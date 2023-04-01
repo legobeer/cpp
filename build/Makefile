@@ -170,6 +170,19 @@ particules/fast:
 .PHONY : particules/fast
 
 #=============================================================================
+# Target rules for targets named testParticule
+
+# Build rule for target.
+testParticule: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testParticule
+.PHONY : testParticule
+
+# fast build rule for target.
+testParticule/fast:
+	$(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
+.PHONY : testParticule/fast
+
+#=============================================================================
 # Target rules for targets named haley
 
 # Build rule for target.
@@ -286,6 +299,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... particules"
+	@echo "... testParticule"
 	@echo "... haley"
 	@echo "... testUnivers"
 	@echo "... testInteractionFaible"

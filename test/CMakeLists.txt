@@ -14,8 +14,8 @@ target_link_libraries(testUnivers particules)
 add_executable(haley Haley.cxx)
 target_link_libraries(haley particules)
 
-# add_executable(testParticule TestParticule.cxx)
-# target_link_libraries(testParticule particules gtest_main)
+add_executable(testParticule TestParticule.cxx)
+target_link_libraries(testParticule particules gtest_main)
 
 include(GoogleTest)
 

@@ -121,9 +121,9 @@ double Vecteur::computeDistance(Vecteur vecteur)
     return pow(tmp.getX() + tmp.getY() + tmp.getZ(), 0.5);
 }
 
-std::list<Vecteur> Vecteur::getVoisins(int nombreDimension)
+std::vector<Vecteur> Vecteur::getVoisins(int nombreDimension)
 {
-    std::list<Vecteur> voisins;
+    std::vector<Vecteur> voisins;
     for (int xOffset = -1; xOffset < 2; xOffset++)
     {
         if (nombreDimension > 1)
