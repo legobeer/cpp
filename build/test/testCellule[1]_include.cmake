@@ -1,0 +1,5 @@
+if(EXISTS "/home/antonin/cpp/build/test/testCellule[1]_tests.cmake")
+  include("/home/antonin/cpp/build/test/testCellule[1]_tests.cmake")
+else()
+  add_test(testCellule_NOT_BUILT testCellule_NOT_BUILT)
+endif()

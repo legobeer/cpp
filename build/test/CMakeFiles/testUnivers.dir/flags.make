@@ -6,5 +6,5 @@ CXX_FLAGS = -Wall   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/antonin/cpp/include 
+CXX_INCLUDES = -I/home/antonin/cpp/include -isystem /home/antonin/cpp/lib/googletest/googletest/include -isystem /home/antonin/cpp/lib/googletest/googletest 
 

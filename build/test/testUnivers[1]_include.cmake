@@ -1,0 +1,5 @@
+if(EXISTS "/home/antonin/cpp/build/test/testUnivers[1]_tests.cmake")
+  include("/home/antonin/cpp/build/test/testUnivers[1]_tests.cmake")
+else()
+  add_test(testUnivers_NOT_BUILT testUnivers_NOT_BUILT)
+endif()

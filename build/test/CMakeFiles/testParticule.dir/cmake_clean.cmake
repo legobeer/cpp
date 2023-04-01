@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/testParticule.dir/TestParticule.cxx.o"
   "testParticule"
   "testParticule.pdb"
+  "testParticule[1]_tests.cmake"
 )
 
 # Per-language clean rules from dependency scanning.

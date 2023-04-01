@@ -149,3 +149,27 @@ std::vector<Vecteur> Vecteur::getVoisins(int nombreDimension)
     }
     return voisins;
 }
+
+Vecteur randomVecteur(int nombreDimension, Vecteur borneInf, Vecteur borneSup)
+
+{
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    double x = 0, y = 0, z = 0;
+    if (nombreDimension > 0)
+    {
+        std::uniform_real_distribution<double> dist(borneInf.getX(), borneSup.getX());
+        x = dist(mt);
+    }
+    if (nombreDimension > 1)
+    {
+        std::uniform_real_distribution<double> dist(borneInf.getY(), borneSup.getY());
+        y = dist(mt);
+    }
+    if (nombreDimension > 2)
+    {
+        std::uniform_real_distribution<double> dist(borneInf.getZ(), borneSup.getZ());
+        z = dist(mt);
+    }
+    return Vecteur(x, y, z);
+}

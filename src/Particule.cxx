@@ -40,6 +40,7 @@ double Particule::getMasse() { return masse; }
 int Particule::getType() { return type; }
 
 void Particule::setForce(Vecteur force) { this->force = force; }
+void Particule::setPosition(Vecteur position) { this->position = position; }
 
 Vecteur Particule::forceGravitationnelleParticule(Particule particule)
 {
@@ -50,9 +51,9 @@ Vecteur Particule::forceGravitationnelleParticule(Particule particule)
 
 Vecteur Particule::forceInteractionFaible(double rCut, std::unordered_set<Particule, HashParticule> particules, double epsilon, double sigma)
 {
-    Vecteur force = 0;
+    Vecteur force;
     double r = 0;
-    Vecteur tmp = 0;
+    Vecteur tmp;
     for (Particule particule : particules)
     {
         if (id != particule.getId())
@@ -61,26 +62,23 @@ Vecteur Particule::forceInteractionFaible(double rCut, std::unordered_set<Partic
             if (r < rCut)
                 tmp = position.getDirection(particule.getPosition()) * (24 * epsilon * (1 - 2 * pow(sigma / r, 6)) * pow(sigma / r, 6) / pow(r, 2));
             else
+            {
+                /* La distance entre les deux particules est supérieur à rCut
+                on néglige ainsi la force d'interaction faible.*/
                 tmp = 0;
+            }
             force += tmp;
         }
     }
     return force;
 }
 
-void Particule::updatePosition(double gammaT)
+void Particule::updatePosition(double deltaT)
 {
-    Vecteur fParticule = force;
-    fParticule *= 0.5 / masse * gammaT;
-    fParticule += vitesse;
-    fParticule *= gammaT;
-    position += fParticule;
+    position += (force * (0.5 / masse * deltaT) + vitesse) * deltaT;
 }
 
-void Particule::updateVitesse(double gammaT, Vecteur fOld)
+void Particule::updateVitesse(double deltaT, Vecteur fOld)
 {
-    Vecteur fParticule = force;
-    fParticule += fOld;
-    fParticule *= 0.5 * gammaT / masse;
-    vitesse += fParticule;
+    vitesse += (force + fOld) * (0.5 * deltaT / masse);
 }

@@ -53,7 +53,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-Wall  "
+					"fragment" : "-Wall -g  "
 				},
 				{
 					"fragment" : "-std=gnu++17"
@@ -64,6 +64,16 @@
 				{
 					"backtrace" : 4,
 					"path" : "/home/antonin/cpp/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/home/antonin/cpp/lib/googletest/googletest/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/home/antonin/cpp/lib/googletest/googletest"
 				}
 			],
 			"language" : "CXX",
@@ -78,6 +88,14 @@
 		{
 			"backtrace" : 2,
 			"id" : "particules::@145eef247bfb46b6828c"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "gtest_main::@7e3677ed2a4dc8c8eb88"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "gtest::@7e3677ed2a4dc8c8eb88"
 		}
 	],
 	"id" : "testUnivers::@36f028580bb02cc8272a",
@@ -86,7 +104,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wall",
+				"fragment" : "-Wall -g",
 				"role" : "flags"
 			},
 			{
@@ -96,6 +114,19 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "../src/libparticules.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../lib/libgtest_main.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "../lib/libgtest.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lpthread",
 				"role" : "libraries"
 			}
 		],

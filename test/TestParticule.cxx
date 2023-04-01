@@ -86,8 +86,8 @@ TEST(ParticuleTest, UpdatePositionTest)
 {
     Particule p(Vecteur(1, 2, 3), 10.0, 0, 0, Vecteur(4, 5, 6));
     p.setForce(Vecteur(7, 8, 9));
-    double gammaT = 0.1;
-    p.updatePosition(gammaT);
+    double deltaT = 0.1;
+    p.updatePosition(deltaT);
     EXPECT_EQ(p.getPosition(), Vecteur(1.4035, 2.504, 3.6045));
 }
 
@@ -95,9 +95,9 @@ TEST(ParticuleTest, UpdateVitesseTest)
 {
     Particule p(Vecteur(1, 2, 3), 100, 0, 0, Vecteur(4, 5, 6));
     p.setForce(Vecteur(7, 8, 9));
-    double gammaT = 0.1;
+    double deltaT = 0.1;
     Vecteur fOld(10, 11, 12);
-    p.updateVitesse(gammaT, fOld);
+    p.updateVitesse(deltaT, fOld);
     EXPECT_EQ(p.getVitesse(), Vecteur(4.0085, 5.0095, 6.0105));
 }
 

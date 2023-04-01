@@ -22,21 +22,23 @@ private:
         cellules;
 
 public:
-    Univers(int, Vecteur, Vecteur, int);
-
-    Univers(int, Vecteur, Vecteur, int, double);
+    Univers(int, Vecteur, Vecteur, int = 3, double = 0);
 
     friend std::ostream &operator<<(std::ostream &, const Univers &);
 
     std::list<Particule> getParticules();
-
     int getNombreParticules();
+    std::unordered_map<Vecteur, Cellule, Vecteur::HashVecteur> getCellules();
 
     void creerCellules();
 
     void creerVoisinsCellules();
 
     void updateMaillage();
+
+    void updateMaillageParticules();
+
+    void updateMaillageVoisins();
 
     void addParticule(Particule);
 
