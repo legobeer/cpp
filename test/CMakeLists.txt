@@ -20,6 +20,12 @@ target_link_libraries(haley particules)
 add_executable(testParticule TestParticule.cxx)
 target_link_libraries(testParticule particules gtest_main)
 
+add_executable(demoCollision DemoCollision.cxx)
+target_link_libraries(demoCollision particules)
+
+add_executable(performanceTest PerformanceTest.cxx)
+target_link_libraries(performanceTest particules)
+
 include(GoogleTest)
 
 gtest_discover_tests(testVecteur)

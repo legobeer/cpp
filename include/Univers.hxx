@@ -5,28 +5,29 @@
 #include <list>
 #include <unordered_map>
 #include <bits/stdc++.h>
+#include <vector>
 
 class Univers
 {
 private:
-    std::list<Particule> particules;
+    std::vector<Particule> particules;
     int nombreParticules;
     Vecteur borneInf;
     Vecteur borneSup;
     int nombreDimension;
     Vecteur lD;
     double rCut;
-    double sigma;
-    double epsilon;
+    double sigma = 1;
+    double epsilon = 5;
     std::unordered_map<Vecteur, Cellule, Vecteur::HashVecteur>
         cellules;
 
 public:
-    Univers(int, Vecteur, Vecteur, int = 3, double = 0);
+    Univers(int, Vecteur, Vecteur, Vecteur, int = 3, double = 0);
 
     friend std::ostream &operator<<(std::ostream &, const Univers &);
 
-    std::list<Particule> getParticules();
+    std::vector<Particule> getParticules();
     int getNombreParticules();
     std::unordered_map<Vecteur, Cellule, Vecteur::HashVecteur> getCellules();
 

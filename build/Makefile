@@ -170,56 +170,17 @@ particules/fast:
 .PHONY : particules/fast
 
 #=============================================================================
-# Target rules for targets named testParticule
+# Target rules for targets named testVecteur
 
 # Build rule for target.
-testParticule: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testParticule
-.PHONY : testParticule
+testVecteur: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testVecteur
+.PHONY : testVecteur
 
 # fast build rule for target.
-testParticule/fast:
-	$(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
-.PHONY : testParticule/fast
-
-#=============================================================================
-# Target rules for targets named haley
-
-# Build rule for target.
-haley: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 haley
-.PHONY : haley
-
-# fast build rule for target.
-haley/fast:
-	$(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
-.PHONY : haley/fast
-
-#=============================================================================
-# Target rules for targets named testUnivers
-
-# Build rule for target.
-testUnivers: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testUnivers
-.PHONY : testUnivers
-
-# fast build rule for target.
-testUnivers/fast:
-	$(MAKE) -f test/CMakeFiles/testUnivers.dir/build.make test/CMakeFiles/testUnivers.dir/build
-.PHONY : testUnivers/fast
-
-#=============================================================================
-# Target rules for targets named testInteractionFaible
-
-# Build rule for target.
-testInteractionFaible: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testInteractionFaible
-.PHONY : testInteractionFaible
-
-# fast build rule for target.
-testInteractionFaible/fast:
-	$(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/build
-.PHONY : testInteractionFaible/fast
+testVecteur/fast:
+	$(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/build
+.PHONY : testVecteur/fast
 
 #=============================================================================
 # Target rules for targets named testCellule
@@ -235,17 +196,82 @@ testCellule/fast:
 .PHONY : testCellule/fast
 
 #=============================================================================
-# Target rules for targets named testVecteur
+# Target rules for targets named demoCollision
 
 # Build rule for target.
-testVecteur: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testVecteur
-.PHONY : testVecteur
+demoCollision: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 demoCollision
+.PHONY : demoCollision
 
 # fast build rule for target.
-testVecteur/fast:
-	$(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/build
-.PHONY : testVecteur/fast
+demoCollision/fast:
+	$(MAKE) -f test/CMakeFiles/demoCollision.dir/build.make test/CMakeFiles/demoCollision.dir/build
+.PHONY : demoCollision/fast
+
+#=============================================================================
+# Target rules for targets named testInteractionFaible
+
+# Build rule for target.
+testInteractionFaible: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testInteractionFaible
+.PHONY : testInteractionFaible
+
+# fast build rule for target.
+testInteractionFaible/fast:
+	$(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/build
+.PHONY : testInteractionFaible/fast
+
+#=============================================================================
+# Target rules for targets named testUnivers
+
+# Build rule for target.
+testUnivers: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testUnivers
+.PHONY : testUnivers
+
+# fast build rule for target.
+testUnivers/fast:
+	$(MAKE) -f test/CMakeFiles/testUnivers.dir/build.make test/CMakeFiles/testUnivers.dir/build
+.PHONY : testUnivers/fast
+
+#=============================================================================
+# Target rules for targets named haley
+
+# Build rule for target.
+haley: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 haley
+.PHONY : haley
+
+# fast build rule for target.
+haley/fast:
+	$(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
+.PHONY : haley/fast
+
+#=============================================================================
+# Target rules for targets named performanceTest
+
+# Build rule for target.
+performanceTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 performanceTest
+.PHONY : performanceTest
+
+# fast build rule for target.
+performanceTest/fast:
+	$(MAKE) -f test/CMakeFiles/performanceTest.dir/build.make test/CMakeFiles/performanceTest.dir/build
+.PHONY : performanceTest/fast
+
+#=============================================================================
+# Target rules for targets named testParticule
+
+# Build rule for target.
+testParticule: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testParticule
+.PHONY : testParticule
+
+# fast build rule for target.
+testParticule/fast:
+	$(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
+.PHONY : testParticule/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -312,12 +338,14 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... particules"
-	@echo "... testParticule"
-	@echo "... haley"
-	@echo "... testUnivers"
-	@echo "... testInteractionFaible"
-	@echo "... testCellule"
 	@echo "... testVecteur"
+	@echo "... testCellule"
+	@echo "... demoCollision"
+	@echo "... testInteractionFaible"
+	@echo "... testUnivers"
+	@echo "... haley"
+	@echo "... performanceTest"
+	@echo "... testParticule"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"

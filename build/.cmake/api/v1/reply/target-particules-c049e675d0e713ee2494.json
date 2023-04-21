@@ -47,7 +47,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-Wall -g  "
+					"fragment" : "-Wall  "
 				},
 				{
 					"fragment" : "-std=gnu++17"

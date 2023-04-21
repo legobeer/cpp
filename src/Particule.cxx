@@ -25,10 +25,11 @@ bool Particule::operator==(const Particule &otherParticule) const
 
 std::ostream &operator<<(std::ostream &os, const Particule &p)
 {
-    std::cout << "Particule n°" << p.id << "\nPosition : " << p.position << std::endl;
-    std::cout << "Masse : " << p.masse << "\nType : " << p.type << "\nVitesse : " << p.vitesse << std::endl;
-    std::cout << "Force : " << p.force << std::endl;
-    std::cout << "------------------------------------";
+    // std::cout << "Particule n°" << p.id << "\nPosition : " << p.position << std::endl;
+    // std::cout << "Masse : " << p.masse << "\nType : " << p.type << "\nVitesse : " << p.vitesse << std::endl;
+    // std::cout << "Force : " << p.force << std::endl;
+    // std::cout << "------------------------------------";
+    std::cout << p.position << std::endl;
     return os;
 }
 

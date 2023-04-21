@@ -56,49 +56,17 @@ CMAKE_BINARY_DIR = /home/antonin/cpp/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -112,17 +80,49 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -157,64 +157,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-test/CMakeFiles/testParticule.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testParticule.dir/rule
-.PHONY : test/CMakeFiles/testParticule.dir/rule
+test/CMakeFiles/testVecteur.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testVecteur.dir/rule
+.PHONY : test/CMakeFiles/testVecteur.dir/rule
 
 # Convenience name for target.
-testParticule: test/CMakeFiles/testParticule.dir/rule
+testVecteur: test/CMakeFiles/testVecteur.dir/rule
 
-.PHONY : testParticule
+.PHONY : testVecteur
 
 # fast build rule for target.
-testParticule/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
-.PHONY : testParticule/fast
-
-# Convenience name for target.
-test/CMakeFiles/haley.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/haley.dir/rule
-.PHONY : test/CMakeFiles/haley.dir/rule
-
-# Convenience name for target.
-haley: test/CMakeFiles/haley.dir/rule
-
-.PHONY : haley
-
-# fast build rule for target.
-haley/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
-.PHONY : haley/fast
-
-# Convenience name for target.
-test/CMakeFiles/testUnivers.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testUnivers.dir/rule
-.PHONY : test/CMakeFiles/testUnivers.dir/rule
-
-# Convenience name for target.
-testUnivers: test/CMakeFiles/testUnivers.dir/rule
-
-.PHONY : testUnivers
-
-# fast build rule for target.
-testUnivers/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testUnivers.dir/build.make test/CMakeFiles/testUnivers.dir/build
-.PHONY : testUnivers/fast
-
-# Convenience name for target.
-test/CMakeFiles/testInteractionFaible.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testInteractionFaible.dir/rule
-.PHONY : test/CMakeFiles/testInteractionFaible.dir/rule
-
-# Convenience name for target.
-testInteractionFaible: test/CMakeFiles/testInteractionFaible.dir/rule
-
-.PHONY : testInteractionFaible
-
-# fast build rule for target.
-testInteractionFaible/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/build
-.PHONY : testInteractionFaible/fast
+testVecteur/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/build
+.PHONY : testVecteur/fast
 
 # Convenience name for target.
 test/CMakeFiles/testCellule.dir/rule:
@@ -232,19 +187,121 @@ testCellule/fast:
 .PHONY : testCellule/fast
 
 # Convenience name for target.
-test/CMakeFiles/testVecteur.dir/rule:
-	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testVecteur.dir/rule
-.PHONY : test/CMakeFiles/testVecteur.dir/rule
+test/CMakeFiles/demoCollision.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/demoCollision.dir/rule
+.PHONY : test/CMakeFiles/demoCollision.dir/rule
 
 # Convenience name for target.
-testVecteur: test/CMakeFiles/testVecteur.dir/rule
+demoCollision: test/CMakeFiles/demoCollision.dir/rule
 
-.PHONY : testVecteur
+.PHONY : demoCollision
 
 # fast build rule for target.
-testVecteur/fast:
-	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testVecteur.dir/build.make test/CMakeFiles/testVecteur.dir/build
-.PHONY : testVecteur/fast
+demoCollision/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/demoCollision.dir/build.make test/CMakeFiles/demoCollision.dir/build
+.PHONY : demoCollision/fast
+
+# Convenience name for target.
+test/CMakeFiles/testInteractionFaible.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testInteractionFaible.dir/rule
+.PHONY : test/CMakeFiles/testInteractionFaible.dir/rule
+
+# Convenience name for target.
+testInteractionFaible: test/CMakeFiles/testInteractionFaible.dir/rule
+
+.PHONY : testInteractionFaible
+
+# fast build rule for target.
+testInteractionFaible/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testInteractionFaible.dir/build.make test/CMakeFiles/testInteractionFaible.dir/build
+.PHONY : testInteractionFaible/fast
+
+# Convenience name for target.
+test/CMakeFiles/testUnivers.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testUnivers.dir/rule
+.PHONY : test/CMakeFiles/testUnivers.dir/rule
+
+# Convenience name for target.
+testUnivers: test/CMakeFiles/testUnivers.dir/rule
+
+.PHONY : testUnivers
+
+# fast build rule for target.
+testUnivers/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testUnivers.dir/build.make test/CMakeFiles/testUnivers.dir/build
+.PHONY : testUnivers/fast
+
+# Convenience name for target.
+test/CMakeFiles/haley.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/haley.dir/rule
+.PHONY : test/CMakeFiles/haley.dir/rule
+
+# Convenience name for target.
+haley: test/CMakeFiles/haley.dir/rule
+
+.PHONY : haley
+
+# fast build rule for target.
+haley/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/build
+.PHONY : haley/fast
+
+# Convenience name for target.
+test/CMakeFiles/performanceTest.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/performanceTest.dir/rule
+.PHONY : test/CMakeFiles/performanceTest.dir/rule
+
+# Convenience name for target.
+performanceTest: test/CMakeFiles/performanceTest.dir/rule
+
+.PHONY : performanceTest
+
+# fast build rule for target.
+performanceTest/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/performanceTest.dir/build.make test/CMakeFiles/performanceTest.dir/build
+.PHONY : performanceTest/fast
+
+# Convenience name for target.
+test/CMakeFiles/testParticule.dir/rule:
+	cd /home/antonin/cpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/testParticule.dir/rule
+.PHONY : test/CMakeFiles/testParticule.dir/rule
+
+# Convenience name for target.
+testParticule: test/CMakeFiles/testParticule.dir/rule
+
+.PHONY : testParticule
+
+# fast build rule for target.
+testParticule/fast:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/testParticule.dir/build.make test/CMakeFiles/testParticule.dir/build
+.PHONY : testParticule/fast
+
+DemoCollision.o: DemoCollision.cxx.o
+
+.PHONY : DemoCollision.o
+
+# target to build an object file
+DemoCollision.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/demoCollision.dir/build.make test/CMakeFiles/demoCollision.dir/DemoCollision.cxx.o
+.PHONY : DemoCollision.cxx.o
+
+DemoCollision.i: DemoCollision.cxx.i
+
+.PHONY : DemoCollision.i
+
+# target to preprocess a source file
+DemoCollision.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/demoCollision.dir/build.make test/CMakeFiles/demoCollision.dir/DemoCollision.cxx.i
+.PHONY : DemoCollision.cxx.i
+
+DemoCollision.s: DemoCollision.cxx.s
+
+.PHONY : DemoCollision.s
+
+# target to generate assembly for a file
+DemoCollision.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/demoCollision.dir/build.make test/CMakeFiles/demoCollision.dir/DemoCollision.cxx.s
+.PHONY : DemoCollision.cxx.s
 
 Haley.o: Haley.cxx.o
 
@@ -272,6 +329,33 @@ Haley.s: Haley.cxx.s
 Haley.cxx.s:
 	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/haley.dir/build.make test/CMakeFiles/haley.dir/Haley.cxx.s
 .PHONY : Haley.cxx.s
+
+PerformanceTest.o: PerformanceTest.cxx.o
+
+.PHONY : PerformanceTest.o
+
+# target to build an object file
+PerformanceTest.cxx.o:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/performanceTest.dir/build.make test/CMakeFiles/performanceTest.dir/PerformanceTest.cxx.o
+.PHONY : PerformanceTest.cxx.o
+
+PerformanceTest.i: PerformanceTest.cxx.i
+
+.PHONY : PerformanceTest.i
+
+# target to preprocess a source file
+PerformanceTest.cxx.i:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/performanceTest.dir/build.make test/CMakeFiles/performanceTest.dir/PerformanceTest.cxx.i
+.PHONY : PerformanceTest.cxx.i
+
+PerformanceTest.s: PerformanceTest.cxx.s
+
+.PHONY : PerformanceTest.s
+
+# target to generate assembly for a file
+PerformanceTest.cxx.s:
+	cd /home/antonin/cpp/build && $(MAKE) -f test/CMakeFiles/performanceTest.dir/build.make test/CMakeFiles/performanceTest.dir/PerformanceTest.cxx.s
+.PHONY : PerformanceTest.cxx.s
 
 TestCellule.o: TestCellule.cxx.o
 
@@ -414,21 +498,29 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install"
-	@echo "... list_install_components"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... install/local"
-	@echo "... testParticule"
 	@echo "... install/strip"
-	@echo "... haley"
-	@echo "... testUnivers"
-	@echo "... testInteractionFaible"
-	@echo "... testCellule"
 	@echo "... testVecteur"
+	@echo "... testCellule"
+	@echo "... demoCollision"
+	@echo "... testInteractionFaible"
+	@echo "... testUnivers"
+	@echo "... haley"
+	@echo "... install/local"
+	@echo "... performanceTest"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... testParticule"
+	@echo "... list_install_components"
+	@echo "... install"
+	@echo "... DemoCollision.o"
+	@echo "... DemoCollision.i"
+	@echo "... DemoCollision.s"
 	@echo "... Haley.o"
 	@echo "... Haley.i"
 	@echo "... Haley.s"
+	@echo "... PerformanceTest.o"
+	@echo "... PerformanceTest.i"
+	@echo "... PerformanceTest.s"
 	@echo "... TestCellule.o"
 	@echo "... TestCellule.i"
 	@echo "... TestCellule.s"

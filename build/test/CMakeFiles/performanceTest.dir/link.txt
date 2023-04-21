@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall   CMakeFiles/performanceTest.dir/PerformanceTest.cxx.o  -o performanceTest  ../src/libparticules.a 

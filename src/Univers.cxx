@@ -8,13 +8,13 @@
 #include <bits/stdc++.h>
 #include <random>
 
-Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int nombreDimension, double rCut)
+Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, Vecteur lD, int nombreDimension, double rCut)
 {
     this->nombreParticules = nombreParticules;
     this->borneInf = borneInf;
     this->borneSup = borneSup;
     this->nombreDimension = nombreDimension;
-    this->lD = borneSup - borneInf;
+    this->lD = lD;
     this->rCut = 0;
     for (int i = 0; i < nombreParticules; i++)
     {
@@ -23,7 +23,7 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, int n
     }
     if (rCut == 0)
         return;
-    creerCellules();
+    // creerCellules();
 }
 
 std::ostream &operator<<(std::ostream &, const Univers &u)
@@ -35,7 +35,7 @@ std::ostream &operator<<(std::ostream &, const Univers &u)
 
 /* Constructor used for make the test of Stromer-Verlet TP2 */
 
-std::list<Particule> Univers::getParticules() { return particules; }
+std::vector<Particule> Univers::getParticules() { return particules; }
 
 int Univers::getNombreParticules() { return nombreParticules; }
 
@@ -48,9 +48,12 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
         return;
     calculForces();
     double t = 0;
+
     while (t < tEnd)
     {
+        printf("%f\n", t);
         t += deltaT;
+
         for (Particule &particule : particules)
         {
             /* Mis à jour de la position de notre particule à l'instant t + deltaT */
@@ -66,8 +69,8 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
         for (Particule &particule : particules)
         {
             /* À décommenter pour afficher une ellipse */
-            // if (particule.getId() == 1)
-            //     std::cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << std::endl;
+            if (particule.getId() == 1)
+                std::cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << std::endl;
             particule.updateVitesse(deltaT, fOld[particule.getId()]);
         }
     }
@@ -75,6 +78,8 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
 
 void Univers::addParticule(Particule p)
 {
+
+    this->nombreParticules += 1;
     this->particules.push_back(p);
 }
 
@@ -109,7 +114,7 @@ void Univers::creerVoisinsCellules()
 void Univers::calculForces()
 {
     calculForcesGravitationnelles();
-    calculForcesInteractionsFaibles();
+    // calculForcesInteractionsFaibles();
 }
 
 void Univers::updateMaillage()
@@ -180,27 +185,36 @@ void Univers::calculForcesInteractionsFaibles()
 
 void Univers::calculForcesGravitationnelles()
 {
-    int iemeParticule = 0, jiemeParticule;
     Vecteur Fij;
-    for (Particule &particuleI : particules)
+
+    for (int i = 0; i < nombreParticules; i++)
     {
-        jiemeParticule = 0;
-        for (Particule &particuleJ : particules)
+        for (int j = i + 1; j < nombreParticules; j++)
         {
-            if (iemeParticule >= jiemeParticule)
-            {
-                jiemeParticule++;
-                continue;
-            }
-            Fij = particuleI.forceGravitationnelleParticule(particuleJ);
-            particuleI.setForce(particuleI.getForce() + Fij);
-            particuleJ.setForce(particuleJ.getForce() - Fij);
-            jiemeParticule++;
+            Fij = particules[i].forceGravitationnelleParticule(particules[j]);
+            particules[i].setForce(particules[i].getForce() + Fij);
+            particules[j].setForce(particules[j].getForce() - Fij);
         }
-        iemeParticule++;
     }
 }
 
+// for (Particule &particuleI : particules)
+// {
+//     jiemeParticule = 0;
+//     for (Particule &particuleJ : particules)
+//     {
+//         if (iemeParticule >= jiemeParticule)
+//         {
+//             jiemeParticule++;
+//             continue;
+//         }
+//         // Fij = particuleI.forceGravitationnelleParticule(particuleJ);
+//         // particuleI.setForce(particuleI.getForce() + Fij);
+//         // particuleJ.setForce(particuleJ.getForce() - Fij);
+//         jiemeParticule++;
+//     }
+//     iemeParticule++;
+// }
 Particule creerParticule(Vecteur borneInf, Vecteur borneSup, int nombreDimension, int id)
 {
     std::random_device rd;
