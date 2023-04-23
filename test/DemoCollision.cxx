@@ -34,9 +34,9 @@ int main()
         y += pow(2, 1.0 / 6);
     }
     /* On a constitué notre univers */
-    /* On crée les cellules */
-    u.creerCellules();
+
     /* On effectue la simulation */
     std::vector<Vecteur> fOld(8000, Vecteur());
     u.stromerVerlet(fOld, 19.5, 0.00005);
+    std::cout << u << std::endl;
 }

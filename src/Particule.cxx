@@ -25,7 +25,7 @@ bool Particule::operator==(const Particule &otherParticule) const
 
 std::ostream &operator<<(std::ostream &os, const Particule &p)
 {
-    // std::cout << "Particule n°" << p.id << "\nPosition : " << p.position << std::endl;
+    // std:: << "Particule n°" << p.id << "\nPosition : " << p.position << std::endl;
     // std::cout << "Masse : " << p.masse << "\nType : " << p.type << "\nVitesse : " << p.vitesse << std::endl;
     // std::cout << "Force : " << p.force << std::endl;
     // std::cout << "------------------------------------";
@@ -52,18 +52,18 @@ Vecteur Particule::forceGravitationnelleParticule(Particule particule)
     return direction;
 }
 
-Vecteur Particule::forceInteractionFaible(double rCut, std::unordered_set<Particule, HashParticule> particules, double epsilon, double sigma)
+Vecteur Particule::forceInteractionFaible(double rCut, std::unordered_set<std::shared_ptr<Particule>, HashParticulePtr> particules, double epsilon, double sigma)
 {
     Vecteur force;
     double r = 0;
     Vecteur tmp;
-    for (Particule particule : particules)
+    for (const auto &particule : particules)
     {
-        if (id != particule.getId())
+        if (id != particule->getId())
         {
-            r = position.computeDistance(particule.getPosition());
+            r = position.computeDistance(particule->getPosition());
             if (r < rCut)
-                tmp = position.getDirection(particule.getPosition()) * (24 * epsilon * (1 - 2 * pow(sigma / r, 6)) * pow(sigma / r, 6) / pow(r, 2));
+                tmp = position.getDirection(particule->getPosition()) * (24 * epsilon * (1 - 2 * pow(sigma / r, 6)) * pow(sigma / r, 6) / pow(r, 2));
             else
             {
                 /* La distance entre les deux particules est supérieur à rCut

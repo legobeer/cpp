@@ -18,7 +18,7 @@ TEST(UniversTest, Constructor)
     // Test the constructor with rCut
     double rCut = 0.5;
 
-    Univers univers2(nombreParticules, borneInf, borneSup, nombreDimension, rCut);
+    Univers univers2(nombreParticules, borneInf, borneSup, Vecteur(), nombreDimension, rCut);
 
     EXPECT_EQ(univers2.getNombreParticules(), nombreParticules);
     EXPECT_EQ(univers2.getParticules().size(), static_cast<size_t>(nombreParticules));
@@ -42,7 +42,7 @@ TEST(UniversTest, StromerVerlet)
     for (int i = 0; i < nombreParticules; i++)
     {
         fOld[i] = randomVecteur(nombreDimension, borneInf, borneSup);
-        univers.getParticules().front().setPosition(randomVecteur(nombreDimension, borneInf, borneSup));
+        univers.getParticules().front()->setPosition(randomVecteur(nombreDimension, borneInf, borneSup));
     }
 
     // Test the stromerVerlet method with deltaT = 0
@@ -52,11 +52,11 @@ TEST(UniversTest, StromerVerlet)
     univers.stromerVerlet(fOld, tEnd, deltaT);
 
     // All particles should have the same position
-    std::vector<Particule> particules = univers.getParticules();
-    EXPECT_TRUE(std::all_of(particules.begin(), particules.end(), [&](Particule particule)
-                            { for (Particule &p : particules) {
-                                if (p.getId() == particule.getId()) 
-                                    return p.getPosition() == particule.getPosition();
+    std::vector<std::shared_ptr<Particule>> particules = univers.getParticules();
+    EXPECT_TRUE(std::all_of(particules.begin(), particules.end(), [&](const auto &particule)
+                            { for (const auto &p : particules) {
+                                if (p->getId() == particule->getId()) 
+                                    return p->getPosition() == particule->getPosition();
                                 } return false; }));
 
     // Test the stromerVerlet method with deltaT > 0
@@ -64,11 +64,11 @@ TEST(UniversTest, StromerVerlet)
     deltaT = 0.1;
     univers.stromerVerlet(fOld, tEnd, deltaT);
     // All particles should have moved
-    std::vector<Particule> particules2 = univers.getParticules();
-    EXPECT_FALSE(std::all_of(particules2.begin(), particules2.end(), [&](Particule particule)
-                             { for (Particule p : particules) {
-                                if (p.getId() == particule.getId()) {
-                                    return p.getPosition() == particule.getPosition();
+    std::vector<std::shared_ptr<Particule>> particules2 = univers.getParticules();
+    EXPECT_FALSE(std::all_of(particules2.begin(), particules2.end(), [&](const auto &particule)
+                             { for (const auto& p : particules) {
+                                if (p->getId() == particule->getId()) {
+                                    return p->getPosition() == particule->getPosition();
                                 }
                             } return true; }));
 }
@@ -86,7 +86,7 @@ TEST(UniversTest, addParticuleTest)
     Particule p(Vecteur(), 3, 0, 0);
     univers.addParticule(p);
     EXPECT_EQ(univers.getParticules().size(), 1);
-    EXPECT_TRUE(univers.getParticules().front() == p);
+    EXPECT_TRUE(*univers.getParticules().front() == p);
 }
 
 int main(int argc, char **argv)

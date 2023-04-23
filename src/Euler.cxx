@@ -2,40 +2,6 @@
 #include <cmath>
 #include <iostream>
 
-double *euler_explicite(int, int, double (*)(double, double), double, double);
-
-double phi1(double, double);
-
-double phi1(double, double, double);
-
-double phi2(double, double);
-
-double *euler_implicite(int, int, double (*)(double, double, double), double, double);
-
-int main()
-{
-    double *res1 = euler_explicite(100, 1, &phi1, 0, 1);
-
-    for (int i = 0; i < 100; i++)
-    {
-        std::cout << res1[i] << std::endl;
-    }
-
-    double *res2 = euler_implicite(100, 1, &phi1, 0, 1);
-
-    for (int i = 0; i < 100; i++)
-    {
-        std::cout << res2[i] << std::endl;
-    }
-
-    double *res3 = euler_explicite(100, 0, &phi2, 0, 2);
-
-    free(res1);
-    free(res2);
-    free(res3);
-    return 0;
-}
-
 double phi1(double resU, double xValue)
 {
     return 2 * resU * xValue;

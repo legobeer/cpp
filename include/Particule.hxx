@@ -74,7 +74,7 @@ public:
 
     struct HashParticulePtr
     {
-        size_t operator()(const std::unique_ptr<Particule> &particule) const
+        size_t operator()(const std::shared_ptr<Particule> &particule) const
         {
             return particule->id;
         }
@@ -91,7 +91,7 @@ public:
      * @return Vecteur correspondant à la force d'interaction faible que notre particule
      * exerce sur toutes les autres particules présentes dans le set particules.
      */
-    Vecteur forceInteractionFaible(double, std::unordered_set<Particule, HashParticule>, double = 5, double = 1);
+    Vecteur forceInteractionFaible(double, std::unordered_set<std::shared_ptr<Particule>, HashParticulePtr>, double = 5, double = 1);
 
     /**
      * Calcule de la force d'attraction gravitationnelle

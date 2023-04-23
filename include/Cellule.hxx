@@ -9,17 +9,17 @@
  * maillage.
  *
  * @param particules : regroupe toutes les particules présentes dans une maille.
- * @param cellulesVoisines : regroupe toutes les mailles voisines contenant des particules.
+ * @param cellulesVoisines : regroupe toutes les mailles voisines contenant des particules.shared_ptr
  *
  */
 class Cellule
 {
 private:
-    std::unordered_set<Particule, Particule::HashParticule> particules;
+    std::unordered_set<std::shared_ptr<Particule>, Particule::HashParticulePtr> particules;
     std::unordered_set<Vecteur, Vecteur::HashVecteur> cellulesVoisines;
 
 public:
-    std::unordered_set<Particule, Particule::HashParticule> getParticules();
+    const std::unordered_set<std::shared_ptr<Particule>, Particule::HashParticulePtr> &getParticules() const;
 
     std::unordered_set<Vecteur, Vecteur::HashVecteur> getCellulesVoisines();
 
@@ -29,7 +29,7 @@ public:
      *
      * @param particule
      */
-    void addParticule(Particule);
+    void addParticule(std::shared_ptr<Particule>);
 
     /**
      * Cette fonction insère les coordonnées d'un vecteur au sein
@@ -47,7 +47,7 @@ public:
      *
      * @param particule
      */
-    void deleteParticule(Particule);
+    void deleteParticule(std::shared_ptr<Particule>);
 
     /**
      * Cette fonction suppriment la case voisine prise en

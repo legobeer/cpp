@@ -16,6 +16,8 @@ int main()
     nombreParticules.push_back(4096);
     nombreParticules.push_back(10000);
     nombreParticules.push_back(100000);
+    nombreParticules.push_back(1000000);
+
     std::list<Particule> listParticles;
     std::deque<Particule> dequePartices;
     std::vector<Particule> vectorParticles;

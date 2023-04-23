@@ -19,23 +19,24 @@ Univers::Univers(int nombreParticules, Vecteur borneInf, Vecteur borneSup, Vecte
     for (int i = 0; i < nombreParticules; i++)
     {
         /* TODO constructor */
-        this->particules.push_back(creerParticule(borneInf, borneSup, nombreDimension, i));
+        this->particules.emplace_back(std::make_shared<Particule>(creerParticule(borneInf, borneSup, nombreDimension, i)));
     }
     if (rCut == 0)
         return;
-    // creerCellules();
+
+    creerCellules();
 }
 
 std::ostream &operator<<(std::ostream &, const Univers &u)
 {
-    for (Particule particule : u.particules)
-        std::cout << particule << std::endl;
+    for (auto it = u.particules.begin(); it != u.particules.end(); ++it)
+        std::cout << **it;
     return std::cout;
 }
 
 /* Constructor used for make the test of Stromer-Verlet TP2 */
 
-std::vector<Particule> Univers::getParticules() { return particules; }
+const std::vector<std::shared_ptr<Particule>> &Univers::getParticules() const { return particules; }
 
 int Univers::getNombreParticules() { return nombreParticules; }
 
@@ -52,25 +53,23 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
     while (t < tEnd)
     {
         t += deltaT;
-
-        for (Particule &particule : particules)
+        for (const auto &particule : particules)
         {
             /* Mis à jour de la position de notre particule à l'instant t + deltaT */
-            particule.updatePosition(deltaT);
-            /* Mis à son placement dans le maillage */
+            particule->updatePosition(deltaT);
             updateMaillage();
-            fOld[particule.getId()] = particule.getForce();
+            fOld[particule->getId()] = particule->getForce();
             /* Mis à 0 de la force de la particule */
-            particule.setForce(0);
+            particule->setForce(0);
         }
         /* Calcul des forces à l'instant t + deltaT */
         calculForces();
-        for (Particule &particule : particules)
+        for (const auto &particule : particules)
         {
             /* À décommenter pour afficher une ellipse */
-            if (particule.getId() == 3)
-                std::cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << std::endl;
-            particule.updateVitesse(deltaT, fOld[particule.getId()]);
+            // if (particule->getId() == 3)
+            // std::cout << particule->getPosition().getX() << " " << particule->getPosition().getY() << std::endl;
+            particule->updateVitesse(deltaT, fOld[particule->getId()]);
         }
     }
 }
@@ -79,16 +78,15 @@ void Univers::addParticule(Particule p)
 {
 
     this->nombreParticules += 1;
-    this->particules.push_back(p);
+    this->particules.emplace_back(std::make_shared<Particule>(p));
 }
 
 void Univers::creerCellules()
 {
-    for (Particule &particule : particules)
+
+    for (const auto &particule : particules)
     {
-        /* On remplie les différentes mailles de notre maillage
-        avec les particules */
-        cellules[particule.getPosition().attributionMaillage(rCut)].addParticule(particule);
+        cellules[particule->getPosition().attributionMaillage(rCut)].addParticule(particule);
     }
     /* We have to compute all the neighboors */
     creerVoisinsCellules();
@@ -127,14 +125,14 @@ void Univers::updateMaillageParticules()
 {
     for (auto p = cellules.begin(); p != cellules.end(); p++)
     {
-        for (Particule particule : p->second.getParticules())
+        for (const auto &particule : p->second.getParticules())
         {
-            if (!(p->first == particule.getPosition().attributionMaillage(rCut)))
+            if (!(p->first == particule->getPosition().attributionMaillage(rCut)))
             {
                 /* Il faut changer la position de la particule dans le maillage */
                 p->second.deleteParticule(particule);
                 /* on ajoute la particule au bon endroit */
-                cellules[particule.getPosition().attributionMaillage(rCut)].addParticule(particule);
+                cellules[particule->getPosition().attributionMaillage(rCut)].addParticule(particule);
                 /* On vérifie si la liste des particules n'est pas vide */
                 if (p->second.getParticules().size() == 0)
                     cellules.erase(p->first);
@@ -167,17 +165,17 @@ void Univers::calculForcesInteractionsFaibles()
     Vecteur force;
     for (auto p = cellules.begin(); p != cellules.end(); p++)
     {
-        for (Particule particule : p->second.getParticules())
+        for (const auto &particule : p->second.getParticules())
         {
             /* Force avec les particules dans la même maille */
             force = 0;
-            force += particule.forceInteractionFaible(rCut, p->second.getParticules(), epsilon, sigma);
+            force += particule->forceInteractionFaible(rCut, p->second.getParticules(), epsilon, sigma);
             for (Vecteur voisin : p->second.getCellulesVoisines())
             {
-                force += particule.forceInteractionFaible(rCut, cellules[voisin].getParticules(), epsilon, sigma);
+                force += particule->forceInteractionFaible(rCut, cellules[voisin].getParticules(), epsilon, sigma);
             }
             /* Mis à jour de la force d'interaction faible */
-            particule.setForce(particule.getForce() + force);
+            particule->setForce(particule->getForce() + force);
         }
     }
 }
@@ -188,11 +186,11 @@ void Univers::calculForcesGravitationnelles()
 
     for (int i = 0; i < nombreParticules; i++)
     {
-        Particule &particuleI = particules[i];
+        Particule &particuleI = *particules[i];
         for (int j = i + 1; j < nombreParticules; j++)
         {
 
-            Particule &particuleJ = particules[j];
+            Particule &particuleJ = *particules[j];
             Fij = particuleI.forceGravitationnelleParticule(particuleJ);
             particuleI.setForce(particuleI.getForce() + Fij);
             particuleJ.setForce(particuleJ.getForce() - Fij);
@@ -200,23 +198,6 @@ void Univers::calculForcesGravitationnelles()
     }
 }
 
-// for (Particule &particuleI : particules)
-// {
-//     jiemeParticule = 0;
-//     for (Particule &particuleJ : particules)
-//     {
-//         if (iemeParticule >= jiemeParticule)
-//         {
-//             jiemeParticule++;
-//             continue;
-//         }
-//         // Fij = particuleI.forceGravitationnelleParticule(particuleJ);
-//         // particuleI.setForce(particuleI.getForce() + Fij);
-//         // particuleJ.setForce(particuleJ.getForce() - Fij);
-//         jiemeParticule++;
-//     }
-//     iemeParticule++;
-// }
 Particule creerParticule(Vecteur borneInf, Vecteur borneSup, int nombreDimension, int id)
 {
     std::random_device rd;

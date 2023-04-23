@@ -4,13 +4,14 @@
 #include "Cellule.hxx"
 #include <list>
 #include <unordered_map>
-#include <bits/stdc++.h>
+#include <cmath>
 #include <vector>
+#include <memory>
 
 class Univers
 {
 private:
-    std::vector<Particule> particules;
+    std::vector<std::shared_ptr<Particule>> particules;
     int nombreParticules;
     Vecteur borneInf;
     Vecteur borneSup;
@@ -27,7 +28,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &, const Univers &);
 
-    std::vector<Particule> getParticules();
+    const std::vector<std::shared_ptr<Particule>> &getParticules() const;
     int getNombreParticules();
     std::unordered_map<Vecteur, Cellule, Vecteur::HashVecteur> getCellules();
 

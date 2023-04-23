@@ -96,7 +96,8 @@ bool Vecteur::operator==(const Vecteur &otherVecteur) const
 
 std::ostream &operator<<(std::ostream &os, const Vecteur &v)
 {
-    std::cout << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+    // std::cout << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+    std::cout << v.x << " " << v.y;
     return os;
 }
 

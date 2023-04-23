@@ -29,6 +29,9 @@ target_link_libraries(performanceTest particules)
 add_executable(testCollection TestCollection.cxx)
 target_link_libraries(testCollection particules)
 
+add_executable(testEuler TestEuler.cxx)
+target_link_libraries(testEuler particules)
+
 
 include(GoogleTest)
 
