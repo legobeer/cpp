@@ -1,0 +1,8 @@
+Temps écoulé insertion de 512 : 0.0187678 s
+Temps écoulé calcul des forces d'interaction gravitationnelles de 512 : 0.0183435 s
+Temps écoulé insertion de 4096 : 0.120383 s
+Temps écoulé calcul des forces d'interaction gravitationnelles de 4096 : 1.12343 s
+Temps écoulé insertion de 32768 : 1.02676 s
+Temps écoulé calcul des forces d'interaction gravitationnelles de 32768 : 75.5537 s
+Temps écoulé insertion de 262144 : 7.93785 s
+Temps écoulé insertion de 2097152 : 63.373 s

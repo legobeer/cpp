@@ -36,17 +36,19 @@ std::ostream &operator<<(std::ostream &os, const Particule &p)
 Vecteur Particule::getVitesse() { return vitesse; }
 Vecteur Particule::getPosition() { return position; }
 Vecteur Particule::getForce() { return force; }
-int Particule::getId() { return id; }
-double Particule::getMasse() { return masse; }
-int Particule::getType() { return type; }
+int Particule::getId() const { return id; }
+double Particule::getMasse() const { return masse; }
+int Particule::getType() const { return type; }
 
 void Particule::setForce(Vecteur force) { this->force = force; }
 void Particule::setPosition(Vecteur position) { this->position = position; }
 
 Vecteur Particule::forceGravitationnelleParticule(Particule particule)
 {
-    Vecteur direction = position.getDirection(particule.getPosition());
-    direction *= masse * particule.getMasse() / pow(position.computeDistance(particule.getPosition()), 3);
+    Vecteur pos = particule.getPosition();
+    Vecteur direction = position.getDirection(pos);
+    double distance = position.computeDistance(pos);
+    direction *= masse * particule.getMasse() / (distance * distance * distance);
     return direction;
 }
 

@@ -1,5 +1,5 @@
 #include "Vecteur.hxx"
-#include <bits/stdc++.h>
+#include <cmath>
 
 Vecteur::Vecteur(double x, double y, double z)
 {

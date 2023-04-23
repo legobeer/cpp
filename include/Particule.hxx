@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include <unordered_set>
+#include <memory>
 
 /**
  * Cette classe a pour but de décrire une particule.
@@ -36,9 +37,9 @@ public:
     Vecteur getVitesse();
     Vecteur getPosition();
     Vecteur getForce();
-    int getId();
-    double getMasse();
-    int getType();
+    int getId() const;
+    double getMasse() const;
+    int getType() const;
 
     void setForce(Vecteur);
     void setPosition(Vecteur);
@@ -68,6 +69,14 @@ public:
         size_t operator()(const Particule &particule) const
         {
             return particule.id;
+        }
+    };
+
+    struct HashParticulePtr
+    {
+        size_t operator()(const std::unique_ptr<Particule> &particule) const
+        {
+            return particule->id;
         }
     };
 

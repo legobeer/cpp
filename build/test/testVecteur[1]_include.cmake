@@ -1,5 +1,0 @@
-if(EXISTS "/home/antonin/cpp/build/test/testVecteur[1]_tests.cmake")
-  include("/home/antonin/cpp/build/test/testVecteur[1]_tests.cmake")
-else()
-  add_test(testVecteur_NOT_BUILT testVecteur_NOT_BUILT)
-endif()

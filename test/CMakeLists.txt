@@ -26,6 +26,10 @@ target_link_libraries(demoCollision particules)
 add_executable(performanceTest PerformanceTest.cxx)
 target_link_libraries(performanceTest particules)
 
+add_executable(testCollection TestCollection.cxx)
+target_link_libraries(testCollection particules)
+
+
 include(GoogleTest)
 
 gtest_discover_tests(testVecteur)

@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall   CMakeFiles/testInteractionFaible.dir/testInteractionFaible.cxx.o  -o testInteractionFaible  ../src/libparticules.a 

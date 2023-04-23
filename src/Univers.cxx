@@ -51,7 +51,6 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
 
     while (t < tEnd)
     {
-        printf("%f\n", t);
         t += deltaT;
 
         for (Particule &particule : particules)
@@ -69,7 +68,7 @@ void Univers::stromerVerlet(std::vector<Vecteur> fOld, double tEnd, double delta
         for (Particule &particule : particules)
         {
             /* À décommenter pour afficher une ellipse */
-            if (particule.getId() == 1)
+            if (particule.getId() == 3)
                 std::cout << particule.getPosition().getX() << " " << particule.getPosition().getY() << std::endl;
             particule.updateVitesse(deltaT, fOld[particule.getId()]);
         }
@@ -114,7 +113,7 @@ void Univers::creerVoisinsCellules()
 void Univers::calculForces()
 {
     calculForcesGravitationnelles();
-    // calculForcesInteractionsFaibles();
+    calculForcesInteractionsFaibles();
 }
 
 void Univers::updateMaillage()
@@ -189,11 +188,14 @@ void Univers::calculForcesGravitationnelles()
 
     for (int i = 0; i < nombreParticules; i++)
     {
+        Particule &particuleI = particules[i];
         for (int j = i + 1; j < nombreParticules; j++)
         {
-            Fij = particules[i].forceGravitationnelleParticule(particules[j]);
-            particules[i].setForce(particules[i].getForce() + Fij);
-            particules[j].setForce(particules[j].getForce() - Fij);
+
+            Particule &particuleJ = particules[j];
+            Fij = particuleI.forceGravitationnelleParticule(particuleJ);
+            particuleI.setForce(particuleI.getForce() + Fij);
+            particuleJ.setForce(particuleJ.getForce() - Fij);
         }
     }
 }

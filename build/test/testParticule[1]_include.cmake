@@ -1,5 +1,0 @@
-if(EXISTS "/home/antonin/cpp/build/test/testParticule[1]_tests.cmake")
-  include("/home/antonin/cpp/build/test/testParticule[1]_tests.cmake")
-else()
-  add_test(testParticule_NOT_BUILT testParticule_NOT_BUILT)
-endif()

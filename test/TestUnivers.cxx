@@ -52,7 +52,7 @@ TEST(UniversTest, StromerVerlet)
     univers.stromerVerlet(fOld, tEnd, deltaT);
 
     // All particles should have the same position
-    std::list<Particule> particules = univers.getParticules();
+    std::vector<Particule> particules = univers.getParticules();
     EXPECT_TRUE(std::all_of(particules.begin(), particules.end(), [&](Particule particule)
                             { for (Particule &p : particules) {
                                 if (p.getId() == particule.getId()) 
@@ -64,7 +64,7 @@ TEST(UniversTest, StromerVerlet)
     deltaT = 0.1;
     univers.stromerVerlet(fOld, tEnd, deltaT);
     // All particles should have moved
-    std::list<Particule> particules2 = univers.getParticules();
+    std::vector<Particule> particules2 = univers.getParticules();
     EXPECT_FALSE(std::all_of(particules2.begin(), particules2.end(), [&](Particule particule)
                              { for (Particule p : particules) {
                                 if (p.getId() == particule.getId()) {
