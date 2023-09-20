@@ -1,33 +1,58 @@
-#include "Particule.hxx"
 #include "Cellule.hxx"
-#include <unordered_set>
+
+Cellule::Cellule(int id, const Vecteur &position, int dimension) : id(id)
+{
+    this->voisins = position.getVoisins(dimension);
+}
+
+bool Cellule::operator==(const Cellule &otherCellule) const
+{
+    if (this->id == otherCellule.id)
+        return true;
+    else
+        return false;
+};
 
 const std::unordered_set<std::shared_ptr<Particule>, Particule::HashParticulePtr> &Cellule::getParticules() const
 {
-    return this->particules;
+    return particules;
 }
 
-std::unordered_set<Vecteur, Vecteur::HashVecteur> Cellule::getCellulesVoisines()
+const std::unordered_set<std::shared_ptr<Cellule>, Cellule::HashCellulePtr> &Cellule::getCellulesVoisines() const
 {
-    return this->cellulesVoisines;
+    return cellulesVoisines;
+}
+
+const std::vector<Vecteur> &Cellule::getVoisins() const
+{
+    return voisins;
 }
 
 void Cellule::addParticule(std::shared_ptr<Particule> particule)
 {
-    this->particules.insert(particule);
+    particules.emplace(particule);
 }
 
-void Cellule::addCelluleVoisine(Vecteur celluleVoisine)
+void Cellule::addCelluleVoisine(std::shared_ptr<Cellule> celluleVoisine)
 {
-    this->cellulesVoisines.insert(celluleVoisine);
+    cellulesVoisines.emplace(celluleVoisine);
 }
 
 void Cellule::deleteParticule(std::shared_ptr<Particule> particule)
 {
-    this->particules.erase(particule);
+
+    auto it = particules.find(particule);
+    if (it != particules.end())
+    {
+        particules.erase(it);
+    }
 }
 
-void Cellule::deleteVoisin(Vecteur voisin)
+void Cellule::deleteVoisin(std::shared_ptr<Cellule> voisin)
 {
-    this->cellulesVoisines.erase(voisin);
+    auto it = cellulesVoisines.find(voisin);
+    if (it != cellulesVoisines.end())
+    {
+        cellulesVoisines.erase(it);
+    }
 }

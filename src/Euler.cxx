@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 double phi1(double resU, double xValue)
 {
@@ -9,7 +10,7 @@ double phi1(double resU, double xValue)
 
 double phi1(double resU, double xValue, double pas)
 {
-    return (double)resU / (1 - 2 * xValue * pas);
+    return resU / (1 - 2 * xValue * pas);
 }
 
 double phi2(double resU, double xValue)
@@ -17,10 +18,10 @@ double phi2(double resU, double xValue)
     return 50 * resU * cos(xValue);
 }
 
-double *euler_explicite(int nbIterations, int condInitiale, double (*func)(double, double), double borneInf, double borneSup)
+std::vector<double> euler_explicite(int nbIterations, int condInitiale, double (*func)(double, double), double borneInf, double borneSup)
 {
-    double *res = (double *)malloc(nbIterations * sizeof(double));
-    double pas = (double)(borneSup - borneInf) / (nbIterations - 1);
+    std::vector<double> res(0, nbIterations);
+    double pas = (borneSup - borneInf) / (nbIterations - 1);
     double tmpX = borneInf + pas;
     res[0] = condInitiale;
     for (int i = 1; i < nbIterations; i++)
@@ -31,10 +32,10 @@ double *euler_explicite(int nbIterations, int condInitiale, double (*func)(doubl
     return res;
 }
 
-double *euler_implicite(int nbIterations, int condInitiale, double (*func)(double, double, double), double borneInf, double borneSup)
+std::vector<double> euler_implicite(int nbIterations, int condInitiale, double (*func)(double, double, double), double borneInf, double borneSup)
 {
-    double *res = (double *)malloc(nbIterations * sizeof(double));
-    double pas = (double)(borneSup - borneInf) / (nbIterations - 1);
+    std::vector<double> res(0, nbIterations);
+    double pas = (borneSup - borneInf) / (nbIterations - 1);
     double tmpX = borneInf + pas;
     res[0] = condInitiale;
     for (int i = 1; i < nbIterations; i++)

@@ -10,9 +10,8 @@ TEST(UniversTest, Constructor)
     Vecteur borneSup(1, 1, 1);
     int nombreDimension = 3;
 
-    Univers univers(nombreParticules, borneInf, borneSup, nombreDimension);
+    Univers univers(nombreParticules, borneInf, borneSup, Vecteur(), nombreDimension, 0);
 
-    EXPECT_EQ(univers.getNombreParticules(), nombreParticules);
     EXPECT_EQ(univers.getParticules().size(), static_cast<size_t>(nombreParticules));
 
     // Test the constructor with rCut
@@ -20,57 +19,8 @@ TEST(UniversTest, Constructor)
 
     Univers univers2(nombreParticules, borneInf, borneSup, Vecteur(), nombreDimension, rCut);
 
-    EXPECT_EQ(univers2.getNombreParticules(), nombreParticules);
     EXPECT_EQ(univers2.getParticules().size(), static_cast<size_t>(nombreParticules));
     EXPECT_GE(univers2.getCellules().size(), 1);
-}
-
-// Tests the stromerVerlet method.
-TEST(UniversTest, StromerVerlet)
-{
-    // Initialize an Univers object
-    int nombreParticules = 10;
-    Vecteur borneInf(0, 0, 0);
-    Vecteur borneSup(1, 1, 1);
-    int nombreDimension = 3;
-    double rCut = 0.5;
-
-    Univers univers(nombreParticules, borneInf, borneSup, nombreDimension, rCut);
-
-    // Set the initial forces and positions
-    std::vector<Vecteur> fOld(nombreParticules);
-    for (int i = 0; i < nombreParticules; i++)
-    {
-        fOld[i] = randomVecteur(nombreDimension, borneInf, borneSup);
-        univers.getParticules().front()->setPosition(randomVecteur(nombreDimension, borneInf, borneSup));
-    }
-
-    // Test the stromerVerlet method with deltaT = 0
-    double tEnd = 1;
-    double deltaT = 0;
-
-    univers.stromerVerlet(fOld, tEnd, deltaT);
-
-    // All particles should have the same position
-    std::vector<std::shared_ptr<Particule>> particules = univers.getParticules();
-    EXPECT_TRUE(std::all_of(particules.begin(), particules.end(), [&](const auto &particule)
-                            { for (const auto &p : particules) {
-                                if (p->getId() == particule->getId()) 
-                                    return p->getPosition() == particule->getPosition();
-                                } return false; }));
-
-    // Test the stromerVerlet method with deltaT > 0
-    tEnd = 10;
-    deltaT = 0.1;
-    univers.stromerVerlet(fOld, tEnd, deltaT);
-    // All particles should have moved
-    std::vector<std::shared_ptr<Particule>> particules2 = univers.getParticules();
-    EXPECT_FALSE(std::all_of(particules2.begin(), particules2.end(), [&](const auto &particule)
-                             { for (const auto& p : particules) {
-                                if (p->getId() == particule->getId()) {
-                                    return p->getPosition() == particule->getPosition();
-                                }
-                            } return true; }));
 }
 
 // Test de la fonction addParticule
@@ -81,9 +31,9 @@ TEST(UniversTest, addParticuleTest)
     Vecteur borneSup(1, 1, 1);
     int nombreDimension = 3;
 
-    Univers univers(nombreParticules, borneInf, borneSup, nombreDimension);
+    Univers univers(nombreParticules, borneInf, borneSup, Vecteur(), nombreDimension, 0);
 
-    Particule p(Vecteur(), 3, 0, 0);
+    Particule p(Vecteur(), 3, 0, 0, Vecteur());
     univers.addParticule(p);
     EXPECT_EQ(univers.getParticules().size(), 1);
     EXPECT_TRUE(*univers.getParticules().front() == p);

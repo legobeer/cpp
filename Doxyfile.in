@@ -1,0 +1,71 @@
+# Doxyfile.in for C++ project
+
+# Project name and version
+PROJECT_NAME           = "My C++ Project"
+PROJECT_NUMBER         = "1.0"
+
+# Source code directory
+INPUT                  = /home/antonin/cpp/src \
+                         /home/antonin/cpp/include
+
+# Output directory for the generated documentation
+OUTPUT_DIRECTORY       = /home/antonin/cpp/doc
+
+# The list of file extensions to be parsed
+FILE_PATTERNS          = *.h *.hpp *.hxx *.c *.cc *.cpp *.cxx
+
+# The encoding of the input files
+INPUT_ENCODING         = UTF-8
+
+# The default output format
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Turn on/off the use of the build-in search engine
+SEARCHENGINE           = YES
+
+# Turn on/off the inclusion of the brief member descriptions
+BRIEF_MEMBER_DESC      = YES
+
+# Turn on/off the inclusion of the detailed member descriptions
+FULL_MEMBER_DESC       = YES
+
+# Turn on/off the inclusion of the documentation for undocumented members
+EXTRACT_ALL            = YES
+
+# Turn on/off the inclusion of undocumented classes and members
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+
+# The output format of the CHM help file
+GENERATE_CHM           = NO
+
+# The output format of the RTF help file
+GENERATE_RTF           = NO
+
+# The output format of the man pages
+GENERATE_MAN           = NO
+
+# The output format of the XML file
+GENERATE_XML           = NO
+
+# The output format of the LaTeX file
+GENERATE_LATEX         = NO
+
+# The output format of the RTF file
+GENERATE_RTF           = NO
+
+# The output format of the HTML help files
+GENERATE_HTMLHELP      = NO
+
+# The output format of the QHP help file
+GENERATE_QHP           = NO
+
+# The output format of the markdown files
+GENERATE_MARKDOWN      = NO
+
+# The file name of the index page for the generated HTML documentation
+INDEX_FILE             = index.html
+
+# The file name of the style sheet for the generated HTML documentation
+HTML_STYLESHEET        = /home/antonin/cpp/doc/doxygen.css

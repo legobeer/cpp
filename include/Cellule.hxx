@@ -1,60 +1,100 @@
 #pragma once
 #include <unordered_set>
 #include "Particule.hxx"
-#include "Vecteur.hxx"
-
 /**
- * Cette classe est utilisé dans la classe Univers où elle est utilisée
- * comme valeur d'une table de hachage. Sa clé associée correspond à la case du
- * maillage.
+ * Cette classe est utilisée dans la classe Univers où elle représente une cellule du maillage.
+ * Chaque cellule contient un ensemble de particules et un ensemble de cellules voisines.
  *
- * @param particules : regroupe toutes les particules présentes dans une maille.
- * @param cellulesVoisines : regroupe toutes les mailles voisines contenant des particules.shared_ptr
- *
+ * @param particules : Ensemble de particules présentes dans la cellule.
+ * @param cellulesVoisines : Ensemble des cellules voisines contenant des particules.
+ * @param id : Identifiant de la cellule.
  */
 class Cellule
 {
+public:
+    /**
+     * Fonction de hachage pour les pointeurs de Cellule.
+     * Utilisé dans les structures de données basées sur le hachage, comme une table de hachage.
+     */
+    struct HashCellulePtr
+    {
+        size_t operator()(const std::shared_ptr<Cellule> &cellule) const
+        {
+            return cellule->id;
+        }
+    };
+
 private:
     std::unordered_set<std::shared_ptr<Particule>, Particule::HashParticulePtr> particules;
-    std::unordered_set<Vecteur, Vecteur::HashVecteur> cellulesVoisines;
+    std::unordered_set<std::shared_ptr<Cellule>, Cellule::HashCellulePtr> cellulesVoisines;
+    int id;
+    std::vector<Vecteur> voisins;
 
 public:
+    /**
+     * Constructeur de la classe Cellule.
+     *
+     * @param id : Identifiant de la cellule.
+     * @param position : Position de notre cellule dans le maillage
+     * @param dimension : Dimension de notre espace
+     */
+    Cellule(int id, const Vecteur &position, int dimension);
+
+    /**
+     * Opérateur d'égalité pour comparer deux cellules.
+     *
+     * @param otherCellule : Autre cellule à comparer.
+     * @return true si les cellules sont égales, false sinon.
+     */
+    bool operator==(const Cellule &otherCellule) const;
+
+    /**
+     * Récupère l'ensemble des particules présentes dans la cellule.
+     *
+     * @return Référence constante vers l'ensemble des particules.
+     */
     const std::unordered_set<std::shared_ptr<Particule>, Particule::HashParticulePtr> &getParticules() const;
 
-    std::unordered_set<Vecteur, Vecteur::HashVecteur> getCellulesVoisines();
+    /**
+     * Récupère l'ensemble des cellules voisines contenant des particules.
+     *
+     * @return Référence constante vers l'ensemble des cellules voisines.
+     */
+    const std::unordered_set<std::shared_ptr<Cellule>, Cellule::HashCellulePtr> &getCellulesVoisines() const;
 
     /**
-     * Cette fonction insère la particule en paramètre dans le set particules
-     * de la classe Cellule
+     * Récupère l'ensemble des cases voisines contenant des particules.
+     * Attention les cases comprennent des cellules vides.
      *
-     * @param particule
+     * @return Référence constante vers l'ensemble des voisins.
      */
-    void addParticule(std::shared_ptr<Particule>);
+    const std::vector<Vecteur> &getVoisins() const;
 
     /**
-     * Cette fonction insère les coordonnées d'un vecteur au sein
-     * du set stockant toutes les cases voisines où des particules sont
-     * présentes.
+     * Ajoute une particule à l'ensemble des particules de la cellule.
      *
-     * @param vecteur coordonnées d'une case voisine où
-     * des particules sont présentes
+     * @param particule : Pointeur vers la particule à ajouter.
      */
-    void addCelluleVoisine(Vecteur);
+    void addParticule(std::shared_ptr<Particule> particule);
 
     /**
-     * Cette fonction supprimela particule en paramètre du set particules
-     * de la classe Cellule.
+     * Insère les coordonnées d'une cellule voisine dans l'ensemble des cellules voisines de la cellule courante.
      *
-     * @param particule
+     * @param cellule : Pointeur vers la cellule voisine à ajouter.
      */
-    void deleteParticule(std::shared_ptr<Particule>);
+    void addCelluleVoisine(std::shared_ptr<Cellule> cellule);
 
     /**
-     * Cette fonction suppriment la case voisine prise en
-     * paramètre du set stockant toutes les cases voisines.
+     * Supprime une particule de l'ensemble des particules de la cellule.
      *
-     * @param vecteur coordonnées d'une case voisine où
-     * des particules sont présentes.
+     * @param particule : Pointeur vers la particule à supprimer.
      */
-    void deleteVoisin(Vecteur);
+    void deleteParticule(std::shared_ptr<Particule> particule);
+
+    /**
+     * Supprime une cellule voisine de l'ensemble des cellules voisines de la cellule courante.
+     *
+     * @param cellule : Pointeur vers la cellule voisine à supprimer.
+     */
+    void deleteVoisin(std::shared_ptr<Cellule> cellule);
 };

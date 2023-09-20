@@ -1,17 +1,16 @@
 #pragma once
-#include <list>
 #include <iostream>
 #include <string>
-#include <bits/stdc++.h>
-
+#include <cmath>
+#include <vector>
 /**
  * La classe Vecteur permet de créer un vecteur en dimension
  * permettant de faire des opérations élémentaires sur les vecteurs
- * que l'on peut avoir dans numpy en python.
+ * similaires à celles disponibles dans la bibliothèque numpy en Python.
  *
- * @param x
- * @param y
- * @param z
+ * @param x : Composante x du vecteur.
+ * @param y : Composante y du vecteur.
+ * @param z : Composante z du vecteur.
  */
 class Vecteur
 {
@@ -45,67 +44,63 @@ public:
 
     friend std::ostream &operator<<(std::ostream &, const Vecteur &);
 
-    double getX();
+    double getX() const;
 
-    double getY();
+    double getY() const;
 
-    double getZ();
+    double getZ() const;
 
-    void setXInt(int);
+    void setX(double);
 
-    void setYInt(int);
+    void setY(double);
 
-    void setZInt(int);
+    void setZ(double);
 
-    void setVecteur(Vecteur);
+    void setVecteur(const Vecteur &);
 
     /**
      * Cette fonction permet de donner la maille
      * du vecteur en fonction d'un paramètre correspondant
      * à la taille de la maille.
      *
-     * @param rCut taille de la maille.
-     *
-     * @return Vecteur coordonnées de la maille.
+     * @param rCut : Taille de la maille.
+     * @return Vecteur : Coordonnées de la maille.
      */
-    Vecteur attributionMaillage(double);
+    Vecteur attributionMaillage(double) const;
 
     /**
      * Cette fonction permet de connaître tous les voisins de Moore d'une case
      * c'est pourquoi cette méthode est utilisable uniquement si tous les
-     * attributs du vecteurs sont des entiers.
+     * attributs du vecteur sont des entiers.
      *
-     * @param nombreDimension correspond à la dimension de notre espace. Peut varier
-     * entre 1 et 3.
-     *
-     * @return Un tableau de vecteur contenant tous les voisins de Moore de notre vecteur
-     * dans un espace de dimension : nombreDimension.
+     * @param nombreDimension : Dimension de notre espace. Peut varier entre 1 et 3.
+     * @return std::vector<Vecteur> : Tableau de vecteurs contenant tous les voisins
+     *                                de Moore de notre vecteur dans un espace de dimension
+     *                                `nombreDimension`.
      */
-    std::vector<Vecteur> getVoisins(int);
+    std::vector<Vecteur> getVoisins(int) const;
 
     /**
-     * Calcule la distance entre 2 points.
+     * Calcule la distance au carré entre 2 points.
      *
-     * @param point point avec lequel on veut calculer la distance.
-     * @return la distance entre notre premier point et le second point
-     * en paramètre.
+     * @param point : Point avec lequel on veut calculer la distance.
+     * @return double : Distance entre notre premier point et le second point en paramètre.
      */
-    double computeDistance(Vecteur);
+    double computeDistance2(const Vecteur &point) const;
 
     /**
      * Cette méthode permet de renvoyer le vecteur entre 2 points :
      * notre point et le point en paramètre.
      *
-     * @param point
-     * @return Vecteur entre nos 2 points.
+     * @param vecteur : Point.
+     * @return Vecteur : Vecteur entre nos 2 points.
      */
-    Vecteur getDirection(Vecteur);
+    Vecteur getDirection(const Vecteur &) const;
 
     /**
-     * Hash de notre classe vecteur. On utilise le code ASCII ainsi
-     * que la conversion de nos paramètres en chaîne de caractère
+     * Hash de notre classe Vecteur. On utilise le code ASCII ainsi
+     * que la conversion de nos paramètres en chaîne de caractères
      * pour définir le hash de notre classe.
-     *
      */
     struct HashVecteur
     {
@@ -123,4 +118,57 @@ public:
     };
 };
 
-Vecteur randomVecteur(int, Vecteur, Vecteur);
+/**
+ * @brief Vérifie la validité d'un nombre de dimensions.
+ *
+ * Cette fonction vérifie la validité d'un nombre de dimensions. Elle génère une exception si le nombre de dimensions spécifié
+ * est invalide.
+ *
+ * @param nombreDimension Le nombre de dimensions à vérifier.
+ *
+ * @throws DimensionInvalide Si le nombre de dimensions spécifié est invalide.
+ */
+void dimensionInvalide(int nombreDimension);
+
+/**
+ * @brief Vérifie la validité d'un vecteur dans un certain nombre de dimensions.
+ *
+ * Cette fonction vérifie la validité d'un vecteur dans un certain nombre de dimensions. Elle effectue les vérifications nécessaires
+ * et génère des exceptions appropriées en cas d'invalidité.
+ *
+ * @param nombreDimension Le nombre de dimensions du vecteur.
+ * @param vecteur Le vecteur à vérifier.
+ *
+ * @throws DimensionInvalide Si le nombre de dimensions spécifié est invalide.
+ * @throws ProblemeVecteurDimension Si le vecteur ne correspond pas au nombre de dimensions spécifié.
+ */
+void vecteurInvalide(int nombreDimension, const Vecteur &vecteur);
+
+/**
+ * @brief Vérifie la validité des bornes spécifiées pour un vecteur dans un certain nombre de dimensions.
+ *
+ * Cette fonction vérifie la validité des bornes spécifiées pour un vecteur dans un certain nombre de dimensions. Elle effectue
+ * les vérifications nécessaires et génère des exceptions appropriées en cas d'invalidité.
+ *
+ * @param borneInf La borne inférieure pour les coordonnées du vecteur.
+ * @param borneSup La borne supérieure pour les coordonnées du vecteur.
+ * @param nombreDimension Le nombre de dimensions du vecteur.
+ *
+ * @throws DimensionInvalide Si le nombre de dimensions spécifié est invalide.
+ * @throws ProblemeVecteurDimension Si les bornes inférieure et supérieure ne correspondent pas au nombre de dimensions spécifié.
+ * @throws InvalidBorneException Si les bornes spécifiées sont invalides.
+ */
+void invalidBorne(const Vecteur &borneInf, const Vecteur &borneSup, int nombreDimension);
+
+/**
+ * @brief Génère un vecteur aléatoire dans les limites spécifiées.
+ *
+ * Cette fonction génère un vecteur aléatoire dans les bornes spécifiées pour un certain nombre de dimensions.
+ *
+ * @param nombreDimension Le nombre de dimensions du vecteur.
+ * @param borneInf La borne inférieure pour les coordonnées du vecteur.
+ * @param borneSup La borne supérieure pour les coordonnées du vecteur.
+ *
+ * @return Retourne un vecteur aléatoire généré dans les bornes spécifiées.
+ */
+Vecteur randomVecteur(int nombreDimension, const Vecteur &borneInf, const Vecteur &borneSup);

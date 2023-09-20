@@ -9,7 +9,7 @@ protected:
     // Create a new cell for each test
     void SetUp() override
     {
-        cellule = new Cellule();
+        cellule = new Cellule(1, Vecteur(), 2);
     }
 
     // Delete the cell after each test
@@ -35,11 +35,12 @@ TEST_F(CelluleTest, AddParticule)
 // Test adding a neighboring cell to a cell
 TEST_F(CelluleTest, AddCelluleVoisine)
 {
-    Vecteur v1(1, 0, 0);
-    cellule->addCelluleVoisine(v1);
-    std::unordered_set<Vecteur, Vecteur::HashVecteur> voisins = cellule->getCellulesVoisines();
+    std::shared_ptr<Cellule> cellule = std::make_shared<Cellule>(Cellule(2, Vecteur(), 2));
+    std::shared_ptr<Cellule> celluleVoisine = std::make_shared<Cellule>(Cellule(2, Vecteur(), 2));
+    cellule->addCelluleVoisine(celluleVoisine);
+    std::unordered_set<std::shared_ptr<Cellule>, Cellule::HashCellulePtr> voisins = cellule->getCellulesVoisines();
     ASSERT_EQ(voisins.size(), 1);
-    ASSERT_EQ(*voisins.begin(), v1);
+    ASSERT_EQ(*voisins.begin(), celluleVoisine);
 }
 
 // Test deleting a particle from a cell
@@ -56,10 +57,10 @@ TEST_F(CelluleTest, DeleteParticule)
 // Test deleting a neighboring cell from a cell
 TEST_F(CelluleTest, DeleteVoisin)
 {
-    Vecteur v1(1, 0, 0);
-    cellule->addCelluleVoisine(v1);
-    cellule->deleteVoisin(v1);
-    std::unordered_set<Vecteur, Vecteur::HashVecteur> voisins = cellule->getCellulesVoisines();
+    std::shared_ptr<Cellule> cell = std::make_shared<Cellule>(Cellule(2, Vecteur(), 2));
+    cellule->addCelluleVoisine(cell);
+    cellule->deleteVoisin(cell);
+    std::unordered_set<std::shared_ptr<Cellule>, Cellule::HashCellulePtr> voisins = cellule->getCellulesVoisines();
     ASSERT_EQ(voisins.size(), 0);
 }
 

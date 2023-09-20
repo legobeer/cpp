@@ -8,9 +8,6 @@ target_link_libraries(testVecteur particules gtest_main)
 add_executable(testCellule TestCellule.cxx)
 target_link_libraries(testCellule particules gtest_main)
 
-add_executable(testInteractionFaible testInteractionFaible.cxx)
-target_link_libraries(testInteractionFaible particules)
-
 add_executable(testUnivers TestUnivers.cxx)
 target_link_libraries(testUnivers particules gtest_main)
 
@@ -31,6 +28,24 @@ target_link_libraries(testCollection particules)
 
 add_executable(testEuler TestEuler.cxx)
 target_link_libraries(testEuler particules)
+
+add_executable(trace trace.cxx)
+
+add_executable(testAbsorption TestAbsorption.cxx)
+target_link_libraries(testAbsorption particules)
+
+
+add_executable(testPeriodique TestPeriodique.cxx)
+target_link_libraries(testPeriodique particules)
+
+
+add_executable(testRelflexion TestReflexion.cxx)
+target_link_libraries(testRelflexion particules)
+add_executable(testEnergieCinetique TestEnergieCinetique.cxx)
+target_link_libraries(testEnergieCinetique particules)
+add_executable(testVTKFile TestVTKFile.cxx)
+target_link_libraries(testVTKFile particules)
+
 
 
 include(GoogleTest)

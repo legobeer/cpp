@@ -5,7 +5,7 @@
 TEST(ParticuleTest, ConstructorTest1)
 {
     Vecteur position(1, 2, 3);
-    Particule p(position, 1.0, 0, 1);
+    Particule p(position, 1.0, 0, 1, Vecteur());
 
     EXPECT_EQ(p.getPosition(), position);
     EXPECT_EQ(p.getMasse(), 1.0);
@@ -52,7 +52,7 @@ TEST(ParticuleTest, ForceGravitationnelleParticuleTest)
 
 // Test the forceInteractionFaible function of the Particule class
 // avec la distance entre les deux particules plus petite que rCut
-TEST(ParticuleTest, ForceInteractionFaibleTest1)
+TEST(ParticuleTest, CalculForce1)
 {
     Particule p1(Vecteur(0, 0, 0), 1.0, 0, 1, Vecteur(0, 0, 0));
     Particule p2(Vecteur(0, 1, 0), 2.0, 0, 2, Vecteur(0, 0, 0));
@@ -62,12 +62,12 @@ TEST(ParticuleTest, ForceInteractionFaibleTest1)
     double epsilon = 1.0;
     double sigma = 1.0;
 
-    Vecteur expected_force(0, -24, 0); // calculated by hand
+    Vecteur expected_force(0, -22, 0); // calculated by hand
 
-    EXPECT_EQ(p1.forceInteractionFaible(rCut, particules, epsilon, sigma), expected_force);
+    EXPECT_EQ(p1.calculForce(rCut, particules, epsilon, sigma), expected_force);
 }
 
-TEST(ParticuleTest, ForceInteractionFaibleTest2)
+TEST(ParticuleTest, CalculForce2)
 {
     Particule p1(Vecteur(0, 0, 0), 1.0, 0, 1, Vecteur(0, 0, 0));
     Particule p2(Vecteur(0, 1, 0), 2.0, 0, 2, Vecteur(0, 0, 0));
@@ -79,7 +79,7 @@ TEST(ParticuleTest, ForceInteractionFaibleTest2)
 
     Vecteur expected_force(0, 0, 0); // calculated by hand
 
-    EXPECT_EQ(p1.forceInteractionFaible(rCut, particules, epsilon, sigma), expected_force);
+    EXPECT_EQ(p1.calculForce(rCut, particules, epsilon, sigma), expected_force);
 }
 
 TEST(ParticuleTest, UpdatePositionTest)

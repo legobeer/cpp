@@ -1,11 +1,12 @@
 #include "Univers.hxx"
 #include "Particule.hxx"
 #include "Vecteur.hxx"
+#include "Cellule.hxx"
 #include <vector>
 
 int main()
 {
-    Univers u = Univers(0, Vecteur(0, 0, 0), Vecteur(0, 0, 0), 1);
+    Univers u = Univers(0, Vecteur(0, 0, 0), Vecteur(0, 0, 0), Vecteur(), 3, 0);
     /* Ajout du Soleil */
     u.addParticule(Particule(Vecteur(0, 0, 0), 1, 0, 0, Vecteur(0, 0, 0)));
     /* Ajout Terre */
@@ -15,5 +16,6 @@ int main()
     /* Ajout Haley */
     u.addParticule(Particule(Vecteur(34.75, 0, 0), 1e-14, 0, 3, Vecteur(0, 0.0296, 0)));
     std::vector<Vecteur> fOld(4, Vecteur());
+    u.creerCellules();
     u.stromerVerlet(fOld, 468.5, 0.015);
 }

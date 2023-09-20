@@ -1,26 +1,23 @@
 #include "Vecteur.hxx"
 #include <cmath>
+#include <random>
+#include "Exception.hxx"
 
-Vecteur::Vecteur(double x, double y, double z)
-{
-    this->x = x;
-    this->y = y;
-    this->z = z;
-}
+Vecteur::Vecteur(double x, double y, double z) : x(x), y(y), z(z) {}
 
-double Vecteur::getX() { return x; }
+double Vecteur::getX() const { return x; }
 
-double Vecteur::getY() { return y; }
+double Vecteur::getY() const { return y; }
 
-double Vecteur::getZ() { return z; }
+double Vecteur::getZ() const { return z; }
 
-void Vecteur::setXInt(int x) { this->x = x; }
+void Vecteur::setX(double x) { this->x = x; }
 
-void Vecteur::setYInt(int y) { this->y = y; }
+void Vecteur::setY(double y) { this->y = y; }
 
-void Vecteur::setZInt(int z) { this->z = z; }
+void Vecteur::setZ(double z) { this->z = z; }
 
-void Vecteur::setVecteur(Vecteur vecteur) { *this = vecteur; }
+void Vecteur::setVecteur(const Vecteur &vecteur) { *this = vecteur; }
 
 Vecteur Vecteur::operator+(const Vecteur &rhs)
 {
@@ -96,35 +93,45 @@ bool Vecteur::operator==(const Vecteur &otherVecteur) const
 
 std::ostream &operator<<(std::ostream &os, const Vecteur &v)
 {
-    // std::cout << '(' << v.x << ", " << v.y << ", " << v.z << ')';
-    std::cout << v.x << " " << v.y;
+    std::cout << v.x << " " << v.y << " " << v.z;
     return os;
 }
 
-Vecteur Vecteur::attributionMaillage(double rCut)
+Vecteur Vecteur::attributionMaillage(double rCut) const
 {
-    Vecteur maillage = (*this);
-    maillage.setXInt((int)(maillage.getX() / rCut));
-    maillage.setYInt((int)(maillage.getY() / rCut));
-    maillage.setZInt((int)(maillage.getZ() / rCut));
+    Vecteur maillage = *this;
+    maillage.setX(static_cast<int>(maillage.getX() / rCut));
+    maillage.setY(static_cast<int>(maillage.getY() / rCut));
+    maillage.setZ(static_cast<int>(maillage.getZ() / rCut));
     return maillage;
 }
 
-Vecteur Vecteur::getDirection(Vecteur vecteur)
+Vecteur Vecteur::getDirection(const Vecteur &vecteur) const
 {
-    return vecteur - *this;
+    return Vecteur(vecteur.getX() - getX(), vecteur.getY() - getY(), vecteur.getZ() - getZ());
 }
 
-double Vecteur::computeDistance(Vecteur vecteur)
+double Vecteur::computeDistance2(const Vecteur &vecteur) const
 {
-    Vecteur tmp = (*this - vecteur);
-    tmp *= tmp;
-    return pow(tmp.getX() + tmp.getY() + tmp.getZ(), 0.5);
+    const double dx = getX() - vecteur.getX();
+    const double dy = getY() - vecteur.getY();
+    const double dz = getZ() - vecteur.getZ();
+
+    const double distance2 = dx * dx + dy * dy + dz * dz;
+    return distance2;
 }
 
-std::vector<Vecteur> Vecteur::getVoisins(int nombreDimension)
+std::vector<Vecteur> Vecteur::getVoisins(int nombreDimension) const
 {
     std::vector<Vecteur> voisins;
+    try
+    {
+        dimensionInvalide(nombreDimension);
+    }
+    catch (const DimensionInvalide &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
     for (int xOffset = -1; xOffset < 2; xOffset++)
     {
         if (nombreDimension > 1)
@@ -151,7 +158,67 @@ std::vector<Vecteur> Vecteur::getVoisins(int nombreDimension)
     return voisins;
 }
 
-Vecteur randomVecteur(int nombreDimension, Vecteur borneInf, Vecteur borneSup)
+void dimensionInvalide(int nombreDimension)
+{
+    if (!(nombreDimension > 0 && nombreDimension < 4))
+        throw DimensionInvalide();
+}
+
+void vecteurInvalide(int nombreDimension, const Vecteur &vecteur)
+{
+    try
+    {
+        dimensionInvalide(nombreDimension);
+    }
+    catch (DimensionInvalide &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    if (nombreDimension == 1 && (vecteur.getY() != 0 || vecteur.getZ()))
+        throw ProblemeVecteurDimension();
+    if (nombreDimension == 2 && vecteur.getZ() != 0)
+        throw ProblemeVecteurDimension();
+}
+
+void invalidBorne(const Vecteur &borneInf, const Vecteur &borneSup, int nombreDimension)
+{
+    try
+    {
+        dimensionInvalide(nombreDimension);
+    }
+    catch (DimensionInvalide &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    try
+    {
+        vecteurInvalide(nombreDimension, borneInf);
+        vecteurInvalide(nombreDimension, borneSup);
+    }
+    catch (ProblemeVecteurDimension &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    Vecteur tmp = borneInf;
+    tmp = -tmp + borneSup;
+    if (nombreDimension > 0)
+    {
+        if (tmp.getX() <= 0)
+            throw InvalidBorneException();
+    }
+    if (nombreDimension > 1)
+    {
+        if (tmp.getY() <= 0)
+            throw InvalidBorneException();
+    }
+    if (nombreDimension > 2)
+    {
+        if (tmp.getZ() <= 0)
+            throw InvalidBorneException();
+    }
+}
+
+Vecteur randomVecteur(int nombreDimension, const Vecteur &borneInf, const Vecteur &borneSup)
 
 {
     std::random_device rd;

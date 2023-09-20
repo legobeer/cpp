@@ -23,11 +23,12 @@ int main()
         auto end_time = std::chrono::high_resolution_clock::now(); // fin du chronomètre
                                                                    // calcul du temps écoulé en nanosecondes
         auto duration_sec = std::chrono::duration<double>(end_time - start_time).count();
+        u.creerCellules();
         std::cout << "Temps écoulé insertion de " << nombreParticule << " : " << duration_sec << " s" << std::endl;
         if (nombreParticule < pow(2, 18))
         {
             start_time = std::chrono::high_resolution_clock::now(); // début du chronomètre
-            u.calculForcesGravitationnelles();
+            u.calculForces();
             end_time = std::chrono::high_resolution_clock::now(); // fin du chronomètre
                                                                   // calcul du temps écoulé en nanosecondes
             duration_sec = std::chrono::duration<double>(end_time - start_time).count();
